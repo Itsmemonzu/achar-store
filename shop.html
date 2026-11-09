@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("achar.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop — ACHAR</title>
+  <meta name="description" content="Shop ACHAR: Recipe 01 boxy linen shirts in five colours, and the Gift Jar.">
+  <meta name="theme-color" content="#0b0b0a">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..600&family=Urbanist:wght@200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/achar.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="shop">
+<main id="main">
+  <section class="shop-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span aria-current="page" data-crumb>Shop</span></nav>
+      <h1 class="t-h2 shop-head__h" data-shop-title>All products</h1>
+      <p class="t-small" data-shop-sub>Recipe 01 in five colours, plus the Gift Jar.</p>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <div class="wrap toolbar__in">
+      <button class="toolbar__filter" data-filters-toggle aria-expanded="true" aria-controls="filters"><svg viewBox="0 0 24 24" class="icon"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>Filter <span data-fcount></span></button>
+      <div class="toolbar__chips" data-active></div>
+      <span class="toolbar__count" data-count aria-live="polite"></span>
+      <label class="toolbar__sort"><span class="sr">Sort by</span>
+        <select class="sel" data-sort>
+          <option value="featured">Featured</option>
+          <option value="new">Newest</option>
+          <option value="low">Price, low to high</option>
+          <option value="high">Price, high to low</option>
+          <option value="az">Alphabetically, A–Z</option>
+        </select>
+      </label>
+      <div class="toolbar__view" role="group" aria-label="Grid density">
+        <button data-cols="3" aria-pressed="false" aria-label="3 per row"><i></i><i></i><i></i></button>
+        <button data-cols="4" aria-pressed="true" aria-label="4 per row"><i></i><i></i><i></i><i></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap shop-body">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div class="filters__head only-mobile-flex"><span class="t-cap">Filter</span><button class="icon-btn" data-filters-close aria-label="Close filters"></button></div>
+      <div class="acc">
+        <details open><summary>Category <span class="pm"></span></summary><div class="acc__body" data-f="cat"></div></details>
+        <details open><summary>Colour <span class="pm"></span></summary><div class="acc__body"><div class="dots" data-f="colour" style="gap:12px"></div></div></details>
+        <details open><summary>Size <span class="pm"></span></summary><div class="acc__body"><div class="chips" data-f="size"></div></div></details>
+        <details><summary>Vibe <span class="pm"></span></summary><div class="acc__body" data-f="vibe"></div></details>
+        <details><summary>Price <span class="pm"></span></summary><div class="acc__body">
+          <div class="range"><input type="range" min="500" max="5000" step="50" value="5000" data-price aria-label="Maximum price"><div class="range__lab"><span>৳500</span><span data-price-out>Up to ৳5,000</span></div></div>
+        </div></details>
+        <details><summary>Availability <span class="pm"></span></summary><div class="acc__body">
+          <label class="check"><input type="checkbox" data-instock> In stock in my size</label>
+          <label class="check"><input type="checkbox" data-sale> On sale</label>
+        </div></details>
+      </div>
+      <button class="link" style="margin-top:22px" data-clear>Clear all</button>
+      <button class="btn btn--block only-mobile-flex" style="margin-top:14px" data-filters-close>Show results</button>
+    </aside>
+    <div>
+      <div class="tiles" data-grid style="--cols:4"></div>
+      <div class="empty" data-empty hidden>
+        <svg class="jar-big" viewBox="0 0 18 26" aria-hidden="true"><rect x="5" y="0.6" width="8" height="2.6"/><path d="M4.5 5.2h9a3 3 0 0 1 3 3V23a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3V8.2a3 3 0 0 1 3-3Z"/></svg>
+        <p class="t-h3">Nothing matches all of those</p>
+        <p class="t-small">Remove a filter to see more.</p>
+        <button class="btn" data-clear>Clear filters</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/shirt.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("achar.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lookbook — ACHAR</title>
+  <meta name="description" content="ACHAR Recipe 01 lookbook: worn in the city.">
+  <meta name="theme-color" content="#0b0b0a">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..600&family=Urbanist:wght@200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/achar.css">
+  <link rel="stylesheet" href="assets/css/tabs.css">
+</head>
+<body data-page="look">
+<main id="main">
+  <section class="wrap lb-head">
+    <div>
+      <nav class="crumbs" aria-label="Breadcrumb" style="color:var(--grey)"><a href="index.html">Home</a><span>/</span><span aria-current="page">Lookbook</span></nav>
+      <h1 class="page-h" data-split>Worn in<br>the city</h1>
+    </div>
+    <p class="rv">Recipe 01 outside the box. Scroll sideways through the looks. The first five frames are ACHAR's own photos; the rest are placeholder mood imagery until the next shoot.</p>
+  </section>
+
+  <section class="hscroll" data-hscroll aria-label="Lookbook gallery">
+    <div class="hscroll__stick">
+      <div class="hscroll__track" data-track></div>
+      <div class="lb-progress"><i data-lp></i></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:clamp(40px,5vw,80px)">
+    <div class="wrap" style="display:grid;justify-items:center;gap:22px;text-align:center">
+      <h2 class="page-h" style="font-size:clamp(40px,5vw,80px)" data-split>Seen one you like?</h2>
+      <p class="lede rv" style="margin:0 auto">Every look is Recipe 01 in one of five colours.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" class="rv"><a class="btn" href="shop.html?cat=shirts">Shop Recipe 01</a><a class="btn btn--ghost" href="colours.html">Compare colours</a></div>
+    </div>
+  </section>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/shirt.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+(function () {
+  const D = window.ACHAR_DATA, S = window.ACHAR_STORE, U = window.ACHAR_UI;
+  const { $, $$ } = U;
+  const looks = [
+    ["ig3", "r01-navy"], ["ig4", "r01-sky"], ["ig1", "r01-brown"], ["ig7", "r01-lime"], ["ig5", "r01-navy"], ["video", "r01-brown"], [1, "r01-oat"], [15, "r01-navy"], [8, "r01-lime"], [2, "r01-sky"], [13, "r01-brown"],
+  ];
+  const track = $("[data-track]");
+  track.innerHTML = `<div class="lb-intro"><b>Look 01–11</b><p style="color:var(--ink-2)">Drag, swipe or keep scrolling.</p></div>` + looks.map(([n, id], i) => {
+    const p = S.product(id);
+    const media = n === "video"
+      ? `<video src="assets/video/reel-b.mp4" poster="assets/video/reel-b.jpg" muted loop playsinline autoplay aria-hidden="true"></video>`
+      : `<img src="${String(n).startsWith("ig") ? D.ig(Number(String(n).slice(2))) : D.img(n)}" alt="Look ${i + 1}: ${String(n).startsWith("ig") ? "photo from ACHAR's Instagram" : "mood photograph (placeholder imagery)"}" loading="eager" decoding="async">`;
+    return `<figure class="look ${n === "video" || ["ig1","ig3","ig4","ig7"].includes(n) ? "look--video" : ""}"><div class="look__img">${media}</div><figcaption><b>Look ${String(i + 1).padStart(2, "0")}</b><a class="look__pair" href="${U.url(p)}"><span class="dot" style="--c:${p.hex}"></span>${p.colour}</a></figcaption></figure>`;
+  }).join("") + `<div class="lb-end"><b>That's the batch</b><a class="btn" href="shop.html?cat=shirts">Shop Recipe 01</a></div>`;
+
+  const hs = $("[data-hscroll]"), stick = $(".hscroll__stick");
+  const desktop = () => matchMedia("(min-width: 901px)").matches;
+  let dist = 0, target = 0, cur = 0;
+  function measure() {
+    if (!desktop()) { hs.style.removeProperty("--hs-h"); return; }
+    dist = Math.max(0, track.scrollWidth - innerWidth);
+    hs.style.setProperty("--hs-h", `${dist + stick.offsetHeight}px`);
+  }
+  function read() {
+    if (!desktop()) return;
+    const r = hs.getBoundingClientRect();
+    target = Math.min(1, Math.max(0, -r.top / Math.max(1, hs.offsetHeight - stick.offsetHeight)));
+  }
+  function frame() {
+    if (desktop()) {
+      cur += (target - cur) * 0.1;
+      track.style.transform = `translate3d(${-cur * dist}px,0,0)`;
+      stick.style.setProperty("--lp", cur.toFixed(4));
+      $$(".look__img", track).forEach((el) => {
+        const b = el.getBoundingClientRect();
+        const c = (b.left + b.width / 2) / innerWidth - 0.5;
+        el.firstElementChild.style.transform = `scale(1.1) translateX(${(-c * 6).toFixed(2)}%)`;
+      });
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener("resize", () => { measure(); read(); });
+  addEventListener("scroll", read, { passive: true });
+  addEventListener("load", measure);
+  measure(); read(); frame();
+  U.watchAll();
+})();
+</script>
+</body>
+</html>

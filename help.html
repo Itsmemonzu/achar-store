@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("achar.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help &amp; delivery — ACHAR</title>
+  <meta name="description" content="Delivery, payments, exchanges and sizing for ACHAR.">
+  <meta name="theme-color" content="#0b0b0a">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..600&family=Urbanist:wght@200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/achar.css">
+  <link rel="stylesheet" href="assets/css/tabs.css">
+</head>
+<body data-page="help">
+<main id="main">
+  <section class="wrap page-head">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span aria-current="page">Help</span></nav>
+    <h1 class="page-h" data-split>Help</h1>
+    <p class="lede rv">Delivery, payments, exchanges and sizing. All fees and policies here are samples for the pitch.</p>
+  </section>
+
+  <div class="wrap help">
+    <nav class="help__nav" aria-label="Help topics" data-help-nav>
+      <a href="#delivery">Delivery</a><a href="#payments">Payments</a><a href="#exchange">Exchanges</a><a href="#size">Size guide</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+    </nav>
+    <div>
+      <section class="help__sec" id="delivery">
+        <h2>Delivery</h2>
+        <div class="help__cards stagger">
+          <div class="help__card"><b>Inside Dhaka</b><big>৳70</big><span>1–2 days · free over ৳4,000</span></div>
+          <div class="help__card"><b>Outside Dhaka</b><big>৳130</big><span>3–5 days, all 64 districts</span></div>
+          <div class="help__card"><b>Same-day</b><big>৳150</big><span>Dhaka, order before 2pm</span></div>
+        </div>
+        <p>Every order ships in a kraft box with the jar tag. You'll get an SMS with the rider's number on the day of delivery.</p>
+      </section>
+
+      <section class="help__sec" id="payments">
+        <h2>Payments</h2>
+        <p>Pay the rider in cash, or pay online. Online payments go through <b>SSLCOMMERZ</b>, Bangladesh's payment gateway, which accepts cards, mobile banking and internet banking.</p>
+        <div data-pay-help></div>
+        <div class="demo-warn"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17v.01"/></svg><span><b>This is a demo storefront.</b> The SSLCOMMERZ checkout shown here is a visual preview only. It is not connected to SSLCOMMERZ, no payment is processed, and you should never enter real card or wallet details.</span></div>
+      </section>
+
+      <section class="help__sec" id="exchange">
+        <h2>Exchanges</h2>
+        <p>Exchange any unworn Recipe 01 shirt for another size or colour within 7 days. Inside Dhaka, we pick it up from your door. Outside Dhaka, send it back with the courier and we'll ship the new one free.</p>
+      </section>
+
+      <section class="help__sec" id="size">
+        <h2>Size guide</h2>
+        <p>Recipe 01 is cut boxy. Prefer it closer? Take one size down. Inches, garment laid flat (sample chart).</p>
+        <div data-size-table></div>
+      </section>
+
+      <section class="help__sec" id="faq">
+        <h2>FAQ</h2>
+        <div class="acc">
+          <details><summary>Can I open the box before paying? <span class="pm"></span></summary><div class="acc__body"><p>Yes. With cash on delivery you can check the shirt in front of the rider before you pay.</p></div></details>
+          <details><summary>Is paying online safe? <span class="pm"></span></summary><div class="acc__body"><p>On the live store, online payments are handled on SSLCOMMERZ's secure page. ACHAR never sees or stores your card number.</p></div></details>
+          <details><summary>Do you ship outside Bangladesh? <span class="pm"></span></summary><div class="acc__body"><p>Not yet. Going global? Hopefully soon.</p></div></details>
+          <details><summary>When is Recipe 02? <span class="pm"></span></summary><div class="acc__body"><p>It's still in the jar. Join the list in the footer and we'll tell you first.</p></div></details>
+        </div>
+      </section>
+
+      <section class="help__sec" id="contact">
+        <h2>Contact</h2>
+        <p>The fastest way is a DM on Instagram <a class="link" href="https://www.instagram.com/achar.wear/" target="_blank" rel="noopener" style="font-size:12px">@achar.wear</a>. Phone, email and address to be added by ACHAR.</p>
+        <form class="contact-form" data-contact novalidate>
+          <div class="fld"><label for="c-name">Name</label><input class="inp" id="c-name" autocomplete="name"></div>
+          <div class="fld"><label for="c-phone">Phone or email</label><input class="inp" id="c-phone"></div>
+          <div class="fld" style="grid-column:1/-1"><label for="c-msg">Message</label><textarea class="inp" id="c-msg"></textarea></div>
+          <div style="grid-column:1/-1;display:flex;gap:16px;align-items:center;flex-wrap:wrap"><button class="btn" type="submit">Send message</button><span class="t-small" data-contact-msg aria-live="polite"></span></div>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/shirt.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+(function () {
+  const D = window.ACHAR_DATA, U = window.ACHAR_UI;
+  const { $, $$ } = U;
+  $("[data-pay-help]").innerHTML = `<div style="display:grid;gap:12px">
+    <div><p class="t-cap" style="margin-bottom:8px">Gateway</p>${U.payBadges(["ssl"])}</div>
+    <div><p class="t-cap" style="margin-bottom:8px">Mobile banking</p>${U.payBadges(["bkash", "nagad", "rocket", "upay"])}</div>
+    <div><p class="t-cap" style="margin-bottom:8px">Cards</p>${U.payBadges(["visa", "mc", "amex", "nexus"])}</div>
+    <div><p class="t-cap" style="margin-bottom:8px">On delivery</p>${U.payBadges(["cod"])}</div></div>`;
+  $("[data-size-table]").innerHTML = `<table class="sizetable"><thead><tr>${D.sizeChart.head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${D.sizeChart.rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const links = $$("[data-help-nav] a");
+  const secs = links.map((a) => $(a.getAttribute("href")));
+  const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) links.forEach((a) => a.classList.toggle("is-on", a.getAttribute("href") === "#" + en.target.id)); }), { rootMargin: "-30% 0px -60% 0px" });
+  secs.forEach((s) => s && io.observe(s));
+  $("[data-contact]").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ok = $("#c-name").value.trim() && $("#c-phone").value.trim() && $("#c-msg").value.trim();
+    $("[data-contact-msg]").textContent = ok ? "Thanks, message received. (Demo: nothing was sent.)" : "Fill in your name, a way to reach you, and a message.";
+  });
+  U.watchAll();
+})();
+</script>
+</body>
+</html>

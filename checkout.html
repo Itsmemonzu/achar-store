@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("achar.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — ACHAR</title>
+  <meta name="theme-color" content="#0b0b0a">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..600&family=Urbanist:wght@200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/achar.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="checkout">
+<main id="main" class="co">
+  <div class="wrap">
+    <div class="co__head">
+      <h1 class="t-h2">Checkout</h1>
+      <ol class="co__steps" aria-label="Checkout steps">
+        <li data-st="0"><i></i><span>Bag</span></li>
+        <li data-st="1"><i></i><span>Delivery</span></li>
+        <li data-st="2"><i></i><span>Payment</span></li>
+        <li data-st="3"><i></i><span>Done</span></li>
+      </ol>
+      <p class="co__demo">Demo checkout · no order is placed and nothing is charged</p>
+    </div>
+
+    <div class="co__grid" data-co>
+      <div class="co__main">
+        <section class="co__step" data-step="0">
+          <h2 class="t-cap co__h">Your bag</h2>
+          <div data-co-lines></div>
+          <div class="co__actions"><a class="link" href="shop.html">Add another colour</a><button class="btn" data-next>Continue to delivery</button></div>
+        </section>
+
+        <section class="co__step" data-step="1" hidden>
+          <h2 class="t-cap co__h">Where should it go?</h2>
+          <form class="co__form" data-addr novalidate>
+            <div class="fld"><label for="f-name">Full name</label><input class="inp" id="f-name" autocomplete="name" required placeholder="Your name"></div>
+            <div class="fld"><label for="f-phone">Mobile number</label><input class="inp" id="f-phone" inputmode="tel" autocomplete="tel" required placeholder="01XXXXXXXXX"><span class="err" data-e="phone"></span></div>
+            <div class="fld"><label for="f-email">Email (optional)</label><input class="inp" id="f-email" type="email" autocomplete="email" placeholder="For the receipt"></div>
+            <div class="fld"><label for="f-dist">District</label><select class="sel" id="f-dist" data-dist></select></div>
+            <div class="fld" style="grid-column:1/-1"><label for="f-addr">Address</label><textarea class="inp" id="f-addr" required placeholder="House, road, area, landmark"></textarea><span class="err" data-e="addr"></span></div>
+            <div class="fld" style="grid-column:1/-1"><span class="lab">Delivery</span><div class="co__opts" data-ship></div></div>
+            <label class="check" style="grid-column:1/-1"><input type="checkbox" data-gift> This is a gift: hide prices and add a note</label>
+            <div class="fld" style="grid-column:1/-1" data-giftnote hidden><label for="f-note">Gift note</label><textarea class="inp" id="f-note" maxlength="140" placeholder="Up to 140 characters"></textarea></div>
+          </form>
+          <div class="co__actions"><button class="link" data-back>Back</button><button class="btn" data-next>Continue to payment</button></div>
+        </section>
+
+        <section class="co__step" data-step="2" hidden>
+          <h2 class="t-cap co__h">How will you pay?</h2>
+          <div class="demo-warn" style="margin-bottom:16px"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17v.01"/></svg><span><b>Demo only.</b> This checkout is a design preview. It is not connected to SSLCOMMERZ or any bank, nothing is charged, and you should never enter real card or wallet details.</span></div>
+          <div class="co__opts" data-pay>
+            <label class="co__opt co__opt--ssl"><input type="radio" name="pay" value="ssl" checked><span><b>Pay online</b><small>Cards, mobile banking and internet banking, secured by SSLCOMMERZ</small><span class="co__brands" data-brands-ssl></span></span><span data-badge-ssl></span></label>
+            <label class="co__opt"><input type="radio" name="pay" value="cod"><span><b>Cash on delivery</b><small>Pay the rider when the box arrives. Check before you pay.</small></span><span data-badge-cod></span></label>
+          </div>
+          <div class="co__cardnote" data-cardnote>You'll continue to the SSLCOMMERZ secure page to finish paying. On the live store ACHAR never sees your card or wallet details.</div>
+          <label class="check" style="margin-top:20px"><input type="checkbox" data-terms> I agree to the exchange policy and terms</label>
+          <p class="err" data-e="terms" style="margin-top:6px"></p>
+          <div class="co__actions"><button class="link" data-back>Back</button><button class="btn" data-place>Place order · <span data-place-total></span></button></div>
+        </section>
+
+        <section class="co__step" data-step="3" hidden>
+          <div class="co__done" data-done></div>
+        </section>
+      </div>
+
+      <aside class="co__side co__sum">
+        <p class="t-cap">Order summary</p>
+        <div class="co__sum-lines" data-sum-lines></div>
+        <div>
+          <form class="co__promo" data-promo><input class="inp" placeholder="Promo code" aria-label="Promo code" data-promo-in><button class="btn btn--ghost" type="submit">Apply</button></form>
+          <p class="t-small" style="margin-top:8px" data-promo-msg>Try GETPICKLED for 10% off (demo)</p>
+        </div>
+        <div class="totals" data-sum-totals></div>
+      </aside>
+    </div>
+  </div>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/shirt.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>
