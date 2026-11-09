@@ -160,8 +160,6 @@
       <nav aria-label="Menu">
         ${[["shop.html", "Shop all", "assets/img/look-02.jpg"], ["lookbook.html", "Lookbook", "assets/img/look-01.jpg"], ["sale.html", "Sale", "assets/img/p/ig-08.jpg"], ["about.html", "The Recipe", "assets/img/look-13.jpg"], ["help.html", "Help & delivery", "assets/img/p/ig-06.jpg"], ["account.html", "Account", "assets/img/look-15.jpg"]].map(([h, t, im], i) => `<a href="${h}" class="menu__link" style="--i:${i}" data-menu-img="${im}">${t}</a>`).join("")}
       </nav>
-      <p class="t-cap" style="margin:28px 0 12px;color:var(--grey)">Five colours</p>
-      <div class="dots">${shirts().map((p) => `<a class="dot dot--lg" href="${url(p)}" style="--c:${p.hex}" aria-label="${p.colour}"></a>`).join("")}</div>
     </div>
   </aside>
   <div class="search" id="search" role="dialog" aria-label="Search" aria-hidden="true">

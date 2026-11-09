@@ -4,7 +4,7 @@ body.on-black .header { background: rgba(12,12,11,.86); color: var(--on-black); 
 body.on-black .header.is-scrolled { border-bottom-color: #2c2b27; }
 body.on-black .header .icon-btn:hover, body.on-black .header .cur:hover { background: rgba(255,255,255,.1); }
 body.on-black .header .badge { background: var(--on-black); color: var(--black); }
-.page-head { padding: clamp(48px, 7vw, 100px) 0 clamp(32px, 4vw, 56px); text-align: center; display: grid; justify-items: center; gap: 16px; }
+.page-head { padding-block: clamp(48px, 7vw, 100px) clamp(32px, 4vw, 56px); text-align: center; display: grid; justify-items: center; gap: 16px; }
 .page-head .crumbs { justify-content: center; padding: 0; }
 .page-h { font-weight: 200; text-transform: uppercase; letter-spacing: .1em; font-size: clamp(48px, 8vw, 132px); line-height: .95; }
 .page-head .lede { margin: 0 auto; text-align: center; }
@@ -78,7 +78,7 @@ body.on-black .header .badge { background: var(--on-black); color: var(--black);
 @media (max-width: 900px) { .quiz__in { grid-template-columns: 1fr; } .quiz__out { position: relative; top: 0; min-height: 0; } }
 
 /* ---------- Lookbook (black, horizontal) ---------- */
-.lb-head { padding: clamp(56px, 8vw, 120px) 0 40px; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; }
+.lb-head { padding-block: clamp(56px, 8vw, 120px) 40px; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; }
 .lb-head .page-h { text-align: left; }
 .lb-head p { max-width: 36ch; color: var(--ink-2); }
 .hscroll { position: relative; height: var(--hs-h, 400vh); }
@@ -183,7 +183,7 @@ body.on-black .header .badge { background: var(--on-black); color: var(--black);
 .help__card span { color: var(--grey); font-size: 16px; }
 .help__card big { font-size: 26px; font-weight: 300; }
 .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 720px; }
-@media (max-width: 900px) { .help { grid-template-columns: 1fr; } .help__nav { position: static; display: flex; overflow-x: auto; scrollbar-width: none; } .help__nav a { white-space: nowrap; } .help__cards, .contact-form { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .help { grid-template-columns: minmax(0, 1fr); } .help__nav { position: static; display: flex; overflow-x: auto; scrollbar-width: none; } .help__nav a { white-space: nowrap; } .help__cards, .contact-form { grid-template-columns: 1fr; } }
 
 
 /* ---------- Photo-led updates ---------- */
