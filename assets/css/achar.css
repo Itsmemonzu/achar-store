@@ -222,6 +222,8 @@ button.dot::after, a.dot::after { content: ""; position: absolute; inset: -4px; 
 /* ---------- Product tile ---------- */
 .tiles { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: clamp(10px, 1.2vw, 18px); row-gap: clamp(28px, 3vw, 44px); }
 .tile { position: relative; display: flex; flex-direction: column; }
+/* Photo, wishlist and quick add share one box, so the button always sits on the photo, never on the text */
+.tile__top { position: relative; }
 .tile__media { position: relative; display: block; aspect-ratio: 4 / 5; background: var(--stone); border-radius: var(--r); overflow: hidden; }
 .tile__media .shirt { position: absolute; inset: 9% 11% 7%; width: 78%; height: 84%; transition: opacity .6s var(--ease), transform .9s var(--ease); }
 .tile__media .shirt--back { opacity: 0; transform: translateY(10px) scale(.97); }

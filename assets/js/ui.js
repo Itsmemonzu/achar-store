@@ -93,12 +93,14 @@
     const add = p.price == null ? `<button class="btn btn--sm tile__add" data-notify="${p.id}">Notify me</button>` : `<button class="btn btn--sm tile__add" data-quick="${p.id}">Quick add</button>`;
     const dots = p.cat === "shirts" ? `<div class="dots">${shirts().map((s) => `<a class="dot" href="${url(s)}" style="--c:${s.hex}" aria-label="${s.colour}" ${s.id === p.id ? 'aria-pressed="true"' : ""}></a>`).join("")}</div>` : "";
     return `<article class="tile" data-id="${p.id}">
-      <a class="tile__media" href="${url(p)}" aria-label="${esc(title(p))}">
-        ${shirt(p, "front", "shirt--front")}${p.cat === "shirts" ? shirt(p, "back", "shirt--back") : ""}
-        ${tag}
-      </a>
-      <button class="tile__wish" data-wish="${p.id}" aria-pressed="${S.isWished(p.id)}" aria-label="Save ${esc(title(p))}">${I.heart}</button>
-      ${add}
+      <div class="tile__top">
+        <a class="tile__media" href="${url(p)}" aria-label="${esc(title(p))}">
+          ${shirt(p, "front", "shirt--front")}${p.cat === "shirts" ? shirt(p, "back", "shirt--back") : ""}
+          ${tag}
+        </a>
+        <button class="tile__wish" data-wish="${p.id}" aria-pressed="${S.isWished(p.id)}" aria-label="Save ${esc(title(p))}">${I.heart}</button>
+        ${add}
+      </div>
       <div class="tile__info">
         <span class="tile__brand">ACHAR · ${p.cat === "shirts" ? "Recipe " + p.recipe : p.cat === "gift" ? "Gift" : "Next"}</span>
         <a class="tile__name" href="${url(p)}">${esc(title(p))}</a>
