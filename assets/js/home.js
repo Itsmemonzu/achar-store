@@ -18,14 +18,13 @@
     cur += (target - cur) * 0.12;
     if (Math.abs(target - cur) < 0.0005) cur = target;
     const e = ease(cur);
-    const fs = 0.73 + e * 0.27, rad = 18 - e * 12;
+    const fs = 0.86 + e * 0.14, rad = 18 - e * 12;
     stage.style.setProperty("--fs", fs.toFixed(4));
     stage.style.setProperty("--frs", `${(rad / fs).toFixed(2)}px`);
     stage.style.setProperty("--spread", (e * maxSpread).toFixed(2));
     stage.style.setProperty("--cy", `${e * -18}px`);
     const sr = stage.getBoundingClientRect(), fr = film.getBoundingClientRect();
     line.style.setProperty("--clip", `inset(${(fr.top - sr.top).toFixed(1)}px ${(sr.right - fr.right).toFixed(1)}px ${(sr.bottom - fr.bottom).toFixed(1)}px ${(fr.left - sr.left).toFixed(1)}px round ${rad.toFixed(1)}px)`);
-    stage.style.setProperty("--no", Math.max(0, 1 - e * 4).toFixed(2));
     requestAnimationFrame(frame);
   }
   /* Outer letters may travel only until they touch the window edge (16px margin). */
