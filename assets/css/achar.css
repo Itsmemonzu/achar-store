@@ -490,7 +490,7 @@ body { font-size: 17px; }
 
 @media (max-width: 1180px) { .nav { display: none !important; } }
 .nav a { white-space: nowrap; }
-.demo-pill.is-tucked { transform: translateY(80px); opacity: 0; pointer-events: none; }
+.demo-pill.is-tucked, .demo-pill.is-hero { transform: translateY(80px); opacity: 0; pointer-events: none; }
 
 .footer__word { padding-bottom: 36px !important; }
 .signoff__bot { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 18px; border-top: 1px solid rgba(242,240,235,.14); font-size: 14px; color: rgba(242,240,235,.72); }

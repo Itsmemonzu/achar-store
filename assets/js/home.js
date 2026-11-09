@@ -23,7 +23,8 @@
     stage.style.setProperty("--frs", `${(rad / fs).toFixed(2)}px`);
     stage.style.setProperty("--spread", (e * maxSpread).toFixed(2));
     stage.style.setProperty("--cy", `${e * -18}px`);
-    const sr = stage.getBoundingClientRect(), fr = film.getBoundingClientRect();
+    /* Clip insets are relative to the outline layer's own box (it is smaller than the stage on phones). */
+    const sr = line.getBoundingClientRect(), fr = film.getBoundingClientRect();
     line.style.setProperty("--clip", `inset(${(fr.top - sr.top).toFixed(1)}px ${(sr.right - fr.right).toFixed(1)}px ${(sr.bottom - fr.bottom).toFixed(1)}px ${(fr.left - sr.left).toFixed(1)}px round ${rad.toFixed(1)}px)`);
     requestAnimationFrame(frame);
   }
@@ -57,7 +58,6 @@
   $("[data-r2]").innerHTML = shirts.map((p) => U.card(p)).join("");
 
   /* ---------- Explore: mosaic of real colours ---------- */
-  $("[data-fan]").innerHTML = ["r01-oat", "r01-sky", "r01-lime", "r01-navy"].map((id) => { const p = S.product(id); return `<img src="${p.imgs[0]}" alt="" loading="lazy">`; }).join("");
 
   /* ---------- Film ---------- */
   const fv = $("[data-lazyplay]"), fb = $("[data-film-play]");

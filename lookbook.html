@@ -35,7 +35,7 @@
     <div class="wrap" style="display:grid;justify-items:center;gap:22px;text-align:center">
       <h2 class="page-h" style="font-size:clamp(40px,5vw,80px)" data-split>Seen one you like?</h2>
       <p class="lede rv" style="margin:0 auto">Every look is Recipe 01 in one of five colours.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" class="rv"><a class="btn" href="shop.html?cat=shirts">Shop Recipe 01</a><a class="btn btn--ghost" href="colours.html">Compare colours</a></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center" class="rv"><a class="btn" href="shop.html?cat=shirts">Shop Recipe 01</a></div>
     </div>
   </section>
 </main>
@@ -54,7 +54,7 @@
   track.innerHTML = `<div class="lb-intro"><b>Look 01–11</b><p style="color:var(--ink-2)">Drag, swipe or keep scrolling.</p></div>` + looks.map(([n, id], i) => {
     const p = S.product(id);
     const media = n === "video"
-      ? `<video src="assets/video/reel-b.mp4" poster="assets/video/reel-b.jpg" muted loop playsinline autoplay aria-hidden="true"></video>`
+      ? `<video src="assets/video/reel-b.mp4" poster="assets/video/reel-b.jpg" muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" autoplay aria-hidden="true"></video>`
       : `<img src="${String(n).startsWith("ig") ? D.ig(Number(String(n).slice(2))) : D.img(n)}" alt="Look ${i + 1}: ${String(n).startsWith("ig") ? "photo from ACHAR's Instagram" : "mood photograph (placeholder imagery)"}" loading="eager" decoding="async">`;
     return `<figure class="look ${n === "video" || ["ig1","ig3","ig4","ig7"].includes(n) ? "look--video" : ""}"><div class="look__img">${media}</div><figcaption><b>Look ${String(i + 1).padStart(2, "0")}</b><a class="look__pair" href="${U.url(p)}"><span class="dot" style="--c:${p.hex}"></span>${p.colour}</a></figcaption></figure>`;
   }).join("") + `<div class="lb-end"><b>That's the batch</b><a class="btn" href="shop.html?cat=shirts">Shop Recipe 01</a></div>`;

@@ -123,7 +123,6 @@
         <button class="icon-btn" data-open="menu" aria-label="Open menu">${I.menu}</button>
         <nav class="nav" aria-label="Primary">
           ${navLink("shop.html", "Shop", "shop")}
-          ${navLink("colours.html", "Colours", "colours")}
           ${navLink("lookbook.html", "Lookbook", "look")}
           ${navLink("about.html", "The Recipe", "about")}
           ${navLink("sale.html", "Sale", "sale", "is-sale")}
@@ -157,7 +156,7 @@
     <div class="menu__bg" aria-hidden="true"><img src="assets/img/look-02.jpg" alt="" data-menu-bg></div>
     <div class="drawer__body menu">
       <nav aria-label="Menu">
-        ${[["shop.html", "Shop all", "assets/img/look-02.jpg"], ["colours.html", "Colours", "assets/img/p/ig-09.jpg"], ["lookbook.html", "Lookbook", "assets/img/look-01.jpg"], ["sale.html", "Sale", "assets/img/p/ig-08.jpg"], ["about.html", "The Recipe", "assets/img/look-13.jpg"], ["help.html", "Help & delivery", "assets/img/p/ig-06.jpg"], ["account.html", "Account", "assets/img/look-15.jpg"]].map(([h, t, im], i) => `<a href="${h}" class="menu__link" style="--i:${i}" data-menu-img="${im}">${t}</a>`).join("")}
+        ${[["shop.html", "Shop all", "assets/img/look-02.jpg"], ["lookbook.html", "Lookbook", "assets/img/look-01.jpg"], ["sale.html", "Sale", "assets/img/p/ig-08.jpg"], ["about.html", "The Recipe", "assets/img/look-13.jpg"], ["help.html", "Help & delivery", "assets/img/p/ig-06.jpg"], ["account.html", "Account", "assets/img/look-15.jpg"]].map(([h, t, im], i) => `<a href="${h}" class="menu__link" style="--i:${i}" data-menu-img="${im}">${t}</a>`).join("")}
       </nav>
       <p class="t-cap" style="margin:28px 0 12px;color:var(--grey)">Five colours</p>
       <div class="dots">${shirts().map((p) => `<a class="dot dot--lg" href="${url(p)}" style="--c:${p.hex}" aria-label="${p.colour}"></a>`).join("")}</div>
@@ -185,7 +184,7 @@
           <form class="news" data-news novalidate><input type="email" placeholder="Your email" aria-label="Email address" required><button class="btn btn--sm" type="submit">Subscribe</button></form>
           <p class="msg" data-news-msg aria-live="polite"></p>
         </div>
-        <div><h4 class="t-cap">Shop</h4><ul><li><a href="shop.html">All</a></li><li><a href="colours.html">Colours</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="sale.html">Sale</a></li><li><a href="shop.html?cat=gift">Gift Jar</a></li></ul></div>
+        <div><h4 class="t-cap">Shop</h4><ul><li><a href="shop.html">All</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="sale.html">Sale</a></li><li><a href="shop.html?cat=gift">Gift Jar</a></li></ul></div>
         <div><h4 class="t-cap">Help</h4><ul><li><a href="help.html#size">Size guide</a></li><li><a href="help.html#delivery">Delivery &amp; COD</a></li><li><a href="help.html#payments">Payments</a></li><li><a href="help.html#exchange">Exchanges</a></li><li><a href="account.html">Track an order</a></li></ul></div>
         <div><h4 class="t-cap">ACHAR</h4><ul><li><a href="about.html">The Recipe</a></li><li><a href="https://www.instagram.com/achar.wear/" target="_blank" rel="noopener">Instagram</a></li><li><a href="help.html#contact">Contact</a></li></ul></div>
       </div>
@@ -582,6 +581,9 @@
     $("[data-demo-x]").addEventListener("click", () => { $(".demo-pill").classList.add("is-gone"); try { sessionStorage.setItem("achar.demo", "1"); } catch (e) {} });
     const so = $(".signoff");
     if (so) new IntersectionObserver(([en]) => $(".demo-pill").classList.toggle("is-tucked", en.isIntersecting)).observe(so);
+    /* Phones: keep the hero buttons clear; the notice slides in once the hero is scrolled past. */
+    const heroEl = $("[data-hero]");
+    if (heroEl && matchMedia("(max-width: 700px)").matches) new IntersectionObserver(([en]) => $(".demo-pill").classList.toggle("is-hero", en.isIntersecting), { rootMargin: "0px 0px -60% 0px" }).observe(heroEl);
   }
 
   window.ACHAR_UI = { $, $$, esc, jar, jarOutline, I, barcode, shirt, card, priceTag, title, url, open, close, toast, quickView, openModal, closeModal, sizeGuideHTML, bindSizeGuide, watchReveal, watchAll, bindRail, flyToBag, check, payBadges, get lenis() { return lenis; } };

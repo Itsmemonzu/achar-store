@@ -22,16 +22,6 @@
 .hero__card:hover .hero__card-go { transform: translateX(4px); }
 .hero__card-go .icon { width: 16px; height: 16px; }
 .hero__note { position: absolute; z-index: 4; left: 50%; bottom: 14px; translate: -50% 0; font-size: 13.5px; color: var(--grey); }
-@media (max-width: 900px) {
-  .hero { height: 170vh; }
-  .hero__word { font-size: 28vw; align-items: flex-start; padding-top: 6vh; }
-  .hero__film { height: 80%; margin-top: 14vh; }
-  .hero__copy { left: 16px; right: 16px; bottom: 18px; max-width: none; background: color-mix(in srgb, var(--paper) 92%, transparent); border-radius: 18px; padding: 16px; box-shadow: 0 20px 50px -24px rgba(0,0,0,.35); }
-  .hero__h { font-size: 24px; }
-  .hero__h br { display: none; }
-  .hero__p { font-size: 16px; }
-  .hero__card, .hero__note { display: none; }
-}
 
 /* ---------- Intro ---------- */
 .intro__in { display: grid; justify-items: center; gap: 22px; text-align: center; }
@@ -67,7 +57,8 @@
 }
 
 /* ---------- Explore cards ---------- */
-.explore__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.explore__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.explore .xcard { aspect-ratio: 4 / 3.4; }
 .xcard { position: relative; display: grid; grid-template-rows: 1fr auto; aspect-ratio: 4 / 5.2; border-radius: 22px; overflow: hidden; background: var(--stone); isolation: isolate; }
 .xcard__art { position: relative; display: grid; place-items: center; overflow: hidden; }
 .xcard__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease-soft); }
@@ -176,7 +167,6 @@
 
 .hero__word--line { inset: 0; z-index: 3; clip-path: var(--clip, inset(50%)); }
 @media (min-width: 901px) { .hero__word--line { align-items: flex-start; padding-top: 9vh; } }
-@media (max-width: 900px) { .hero__word--line { align-items: flex-start; padding-top: 6vh; } }
 
 /* Shift both wordmark layers so the H sits on the centre line */
 .hero__word { translate: var(--wx, 0px) 0; }
@@ -201,6 +191,22 @@
 /* Frosted fill: a letter cut by the film edge continues as one soft shape instead of a stray line */
 .hero__word--line { color: rgba(255,255,255,.5) !important; -webkit-text-stroke: 1.5px rgba(255,255,255,.9) !important; paint-order: stroke fill; }
 .hero__word--line span { will-change: auto; }
+
+/* ---------- Hero on phones: same composition as desktop ----------
+   Film in the upper part of the stage, the wordmark centred across it (frosted where covered),
+   the copy below the film rather than in a box over it. */
+@media (max-width: 900px) {
+  .hero { height: 170vh; }
+  .hero__stage { place-items: start center; }
+  .hero__film { height: 62%; margin-top: 3svh; }
+  .hero__word, .hero__word.hero__word--line { inset: 3svh 0 auto 0; height: 62%; align-items: center; padding-top: 0; font-size: 25vw; }
+  .hero__copy { left: 16px; right: 16px; bottom: clamp(16px, 3svh, 28px); max-width: none; gap: 12px; }
+  .hero__h { font-size: clamp(28px, 8.4vw, 40px); }
+  .hero__p { font-size: 16px; line-height: 1.45; }
+  .hero__ctas { gap: 20px; margin-top: 2px; }
+  .hero__ctas .btn { height: 48px; padding: 0 24px; }
+  .hero__card { display: none; }
+}
 
 /* ---------- Reviews: stacked, crossfading quotes ---------- */
 .voices__stage { display: grid; min-height: 0; }
