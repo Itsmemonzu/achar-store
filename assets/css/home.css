@@ -192,6 +192,13 @@
 .hero__word--line { color: rgba(255,255,255,.5) !important; -webkit-text-stroke: 1.5px rgba(255,255,255,.9) !important; paint-order: stroke fill; }
 .hero__word--line span { will-change: auto; }
 
+/* ---------- Hero on desktop: wordmark sized by height too, so it never reaches the copy ---------- */
+@media (min-width: 901px) {
+  .hero__word, .hero__word.hero__word--line { font-size: min(19vw, 30svh, 340px); padding-top: 7svh; }
+  .hero__copy { max-width: 600px; }
+  .hero__h { font-size: clamp(36px, 3.6vw, 64px); }
+}
+
 /* ---------- Hero on phones: same composition as desktop ----------
    Film in the upper part of the stage, the wordmark centred across it (frosted where covered),
    the copy below the film rather than in a box over it. */
