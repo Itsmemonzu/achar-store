@@ -222,3 +222,14 @@ body.on-black .header .badge { background: var(--on-black); color: var(--black);
   .strip__shirt { display: block !important; }
   .strip__shirt img { object-position: 50% 20%; }
 }
+
+/* ---------- Recipe page on phones: the four details become a swipeable rail ---------- */
+@media (max-width: 760px) {
+  .details { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+  .details::-webkit-scrollbar { display: none; }
+  .detail { flex: 0 0 72%; scroll-snap-align: start; gap: 16px; }
+  .detail b { font-size: 14px; margin-bottom: 4px; }
+  .detail span { font-size: 15.5px; }
+  .story { gap: 32px; }
+  .pack { gap: 36px; }
+}

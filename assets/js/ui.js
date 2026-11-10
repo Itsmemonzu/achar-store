@@ -90,7 +90,7 @@
 
   function card(p) {
     const tag = p.tag === "new" ? `<span class="tile__tag">New</span>` : p.tag === "soon" ? `<span class="tile__tag">Soon</span>` : p.was ? `<span class="tile__tag tile__tag--sale">Sale</span>` : "";
-    const add = p.price == null ? `<button class="btn btn--sm tile__add" data-notify="${p.id}">Notify me</button>` : `<button class="btn btn--sm tile__add" data-quick="${p.id}">Quick add</button>`;
+    const add = p.price == null ? `<button class="btn btn--sm tile__add" data-notify="${p.id}">Notify me</button>` : `<button class="btn btn--sm tile__add" data-quick="${p.id}" aria-label="Quick add ${esc(title(p))}"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Quick add</span></button>`;
     const dots = p.cat === "shirts" ? `<div class="dots">${shirts().map((s) => `<a class="dot" href="${url(s)}" style="--c:${s.hex}" aria-label="${s.colour}" ${s.id === p.id ? 'aria-pressed="true"' : ""}></a>`).join("")}</div>` : "";
     return `<article class="tile" data-id="${p.id}">
       <div class="tile__top">
@@ -577,7 +577,7 @@
   let demoGone = false;
   try { demoGone = sessionStorage.getItem("achar.demo") === "1"; } catch (e) {}
   if (!demoGone) {
-    document.body.insertAdjacentHTML("beforeend", `<div class="demo-pill" role="note"><i></i><span>Demo store · nothing is charged</span><button aria-label="Dismiss demo notice" data-demo-x>${I.close.replace('class="icon"', 'class="icon" style="width:14px;height:14px"')}</button></div>`);
+    document.body.insertAdjacentHTML("beforeend", `<div class="demo-pill" role="note"><i></i><span>Demo store<em> · nothing is charged</em></span><button aria-label="Dismiss demo notice" data-demo-x>${I.close.replace('class="icon"', 'class="icon" style="width:14px;height:14px"')}</button></div>`);
     $("[data-demo-x]").addEventListener("click", () => { $(".demo-pill").classList.add("is-gone"); try { sessionStorage.setItem("achar.demo", "1"); } catch (e) {} });
     const so = $(".signoff");
     if (so) new IntersectionObserver(([en]) => $(".demo-pill").classList.toggle("is-tucked", en.isIntersecting)).observe(so);

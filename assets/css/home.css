@@ -220,3 +220,62 @@
 .voices__stage .voice { grid-area: 1 / 1; opacity: 0; transform: translateY(18px); filter: blur(6px); transition: opacity 1s var(--ease-soft), transform 1.2s var(--ease-soft), filter 1s var(--ease-soft); animation: none; pointer-events: none; }
 .voices__stage .voice.is-on { opacity: 1; transform: none; filter: none; pointer-events: auto; transition-delay: .25s; }
 .voices__stage .voice.is-out { transform: translateY(-18px); }
+
+/* ---------- Home on phones: one idea per screen ---------- */
+@media (max-width: 760px) {
+  /* Hero: the stage leaves room for the announcement band, so the buttons are on the first screen */
+  .hero__stage { height: calc(100svh - var(--header-h) - var(--band-h)); }
+  /* Hero: both actions on one line under the copy */
+  .hero__copy { left: var(--gutter); right: var(--gutter); gap: 10px; }
+  .hero__p { font-size: 15.5px; max-width: 32ch; }
+  .hero__ctas { gap: 20px; margin-top: 8px; }
+  .hero__ctas .btn { height: 46px; padding: 0 20px; }
+  .hero__ctas .link { font-size: 12.5px; letter-spacing: .1em; }
+
+  .intro__in { gap: 26px; }
+  .intro .lede { max-width: 30ch; }
+
+  /* Recipe 01: a swipeable rail of large cards instead of a packed grid */
+  .r2__top { border-bottom: 0; padding-bottom: 0; }
+  .r2__label:last-child { display: none; }
+  .r2__mast { font-size: 20vw; margin: 14px 0 30px -0.03em; }
+  .r2__grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+  .r2__grid::-webkit-scrollbar { display: none; }
+  .r2__grid > .tile { flex: 0 0 70%; scroll-snap-align: start; }
+  .r2__grid .dots { display: none; }
+  .r2__grid .tile__name { font-size: 16.5px; }
+  .r2__grid .tile .price { font-size: 16px; }
+  .r2__foot { margin-top: 40px; border-top: 0; padding-top: 0; gap: 22px; }
+  .r2__note { font-size: 15.5px; }
+
+  /* Editorial: the copy, then one photograph */
+  .edit__label { display: none; }
+  .edit__in { grid-template-columns: 1fr; gap: 40px; }
+  .edit__copy { gap: 20px; }
+  .edit__h { font-size: 40px; }
+  .edit__fig--b { display: none; }
+
+  .explore__grid { gap: 16px; }
+  .xcard { aspect-ratio: 4 / 3.2; }
+  .xcard__txt { padding: 18px 20px 20px; }
+  .xcard__txt b { font-size: 22px; }
+  .xcard__txt span { font-size: 14.5px; }
+
+  /* Film: a calmer 4:5 crop, then the copy */
+  .film__in { gap: 40px; }
+  .film__frame { max-width: none; aspect-ratio: 4 / 5; }
+  .film__h { font-size: 40px; }
+  .film__copy { gap: 20px; }
+
+  /* Services: four quiet rows instead of a 2 x 2 box grid */
+  .services__in { grid-template-columns: 1fr; padding-block: 14px; }
+  .svc { grid-template-columns: 32px 1fr; justify-items: start; align-items: center; text-align: left; column-gap: 20px; row-gap: 2px; padding: 22px 0; }
+  .svc svg { grid-row: 1 / span 2; width: 30px; height: 30px; margin: 0; }
+  .svc + .svc, .svc:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+  .svc b { font-size: 13.5px; }
+  .svc span { font-size: 15.5px; }
+
+  .voices { padding: 72px 0; }
+  .voice q { font-size: 25px; line-height: 1.35; }
+  .ig__grid { gap: 10px; }
+}
