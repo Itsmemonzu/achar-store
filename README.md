@@ -1,5 +1,7 @@
 # Northline storefront (concept brand, demo)
 
+Live: https://itsmemonzu.github.io/northline-store/
+
 Northline is a concept clothing brand used to demonstrate a complete storefront. It is static and front-end only. Open `index.html` through any local server, for example:
 
 ```bash
