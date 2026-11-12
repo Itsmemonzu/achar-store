@@ -1,5 +1,5 @@
 (function () {
-  const D = window.ACHAR_DATA, S = window.ACHAR_STORE, U = window.ACHAR_UI;
+  const D = window.NL_DATA, S = window.NL_STORE, U = window.NL_UI;
   const { $, $$, esc } = U;
   const qs = new URLSearchParams(location.search);
   const all = D.products;
@@ -16,11 +16,11 @@
     q: qs.get("q") || "",
     sort: "featured",
   };
-  const CATS = { shirts: "Recipe 01 shirts", gift: "Gift Jar", upcoming: "Coming soon" };
+  const CATS = { shirts: "Line 01", gift: "Gift Card", upcoming: "Coming soon" };
 
   /* Build filter controls */
   $('[data-f="cat"]').innerHTML = Object.entries(CATS).map(([k, t]) => `<label class="check"><input type="checkbox" value="${k}" ${st.cat.has(k) ? "checked" : ""}> ${t} <span style="color:var(--grey);margin-left:auto">${all.filter((p) => p.cat === k).length}</span></label>`).join("");
-  $('[data-f="colour"]').innerHTML = shirts.map((p) => `<button class="dot dot--lg" style="--c:${p.hex}" data-v="${p.colour}" aria-pressed="false" aria-label="${p.colour}" title="${p.colour}"></button>`).join("");
+  $('[data-f="colour"]').innerHTML = [...new Map(shirts.map((p) => [p.colour, p])).values()].map((p) => `<button class="dot dot--lg" style="--c:${p.hex}" data-v="${p.colour}" aria-pressed="false" aria-label="${p.colour}" title="${p.colour}"></button>`).join("");
   $('[data-f="size"]').innerHTML = ["S", "M", "L", "XL", "XXL"].map((s) => `<button class="chip" data-v="${s}" aria-pressed="false">${s}</button>`).join("");
   $('[data-f="vibe"]').innerHTML = Object.entries(D.vibes).map(([k, v]) => `<label class="check"><input type="checkbox" value="${k}" ${st.vibe.has(k) ? "checked" : ""}> ${v.label}</label>`).join("");
   $("[data-sale]").checked = st.sale;
@@ -88,7 +88,7 @@
     if (st.sale && !p.was) return false;
     if (st.q) {
       const t = st.q.toLowerCase();
-      if (![p.name, p.colour, p.notes, p.cat, "recipe " + p.recipe, ...(p.vibe || [])].join(" ").toLowerCase().includes(t)) return false;
+      if (![p.name, p.colour, p.type || "", p.notes, p.cat, "line " + p.line, ...(p.vibe || [])].join(" ").toLowerCase().includes(t)) return false;
     }
     return true;
   }
@@ -112,7 +112,7 @@
     $("[data-active]").innerHTML = chips.map(([k, t]) => `<button class="chip chip--wide is-on" data-unset="${esc(k)}" aria-label="Remove filter ${esc(t)}">${esc(t)}<svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" stroke-width="2" fill="none" style="margin-left:8px" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button>`).join("");
     $("[data-fcount]").textContent = chips.length ? `(${chips.length})` : "";
     const one = st.cat.size === 1 ? [...st.cat][0] : null;
-    $("[data-shop-title]").textContent = st.q ? `“${st.q}”` : one === "shirts" ? "Recipe 01" : one === "gift" ? "Gift Jar" : st.sale ? "On sale" : "All products";
+    $("[data-shop-title]").textContent = st.q ? `“${st.q}”` : one === "shirts" ? "Line 01" : one === "gift" ? "Gift Card" : st.sale ? "On sale" : "All products";
     $("[data-crumb]").textContent = $("[data-shop-title]").textContent;
   }
   render();

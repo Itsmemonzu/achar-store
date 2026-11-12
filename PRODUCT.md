@@ -8,84 +8,54 @@ web
 
 ## Stack
 
-Static HTML/CSS/JS. There is no build step and no backend. This is a clickable visual prototype for pitching to the client.
+Static HTML/CSS/JS. There is no build step and no backend. This is a clickable visual demo of a complete storefront.
 
 ## Users
 
-**The pitch audience** is the owners of ACHAR (instagram.com/achar.wear), a young Bangladeshi clothing label. They need to see their brand as a complete online store.
+**The demo audience** is prospective clients of the studio that built it, who need to see what a finished clothing storefront looks and feels like.
 
-**The store audience** is young urban Bangladeshi shoppers:
-- They arrive from Instagram on their phones.
-- They buy considered basics, starting with a boxy linen shirt.
-- They choose by colour and by "vibe".
+**The store audience (fictional)** is young urban Bangladeshi shoppers:
+- They arrive from social media on their phones.
+- They buy a few strong pieces at a time: boxy tees, wide denim, cropped tailoring.
+- They choose by piece, colour and "vibe".
 
 ## Product Purpose
 
-The site is a complete, premium storefront for ACHAR. It covers:
-- home
-- shop with filters
-- product detail
-- bag
-- checkout stations
-- search
-- wishlist
-- account
-- a "find your colour" helper
-
-Every control responds in the browser; nothing is sent anywhere. Success means the client recognises their brand in it and commissions the build.
+A complete, premium storefront for Northline, a concept brand. It covers home, shop with filters, product detail, bag, checkout stations, search, wishlist and account. Every control responds in the browser; nothing is sent anywhere.
 
 ## Positioning
 
-ACHAR (আচার, "pickle") names its drops "Recipes". The tagline is "An acquired taste. A considered fit." The current drop is "Recipe 01 — Now serving." The pickle-jar logo and the kraft "Get pickled" packaging are things no neighbouring label can claim.
-
-The visual references were finesse.com.bd (minimal, video-led ecommerce completeness), wrclo.com (marquee energy) and fragranciabd.com (a guided "find your…" helper, bundles and a facts strip). They are inspiration only, never copies.
+Northline is named for 23.8° N, the latitude through Dhaka, where every piece is "drawn". Tagline: "Clean lines. Considered fit." Drops are called Lines: Line 01 is out, Line 02 is coming. Packaging line: "Keep north."
 
 ## Operating Context
 
-- Mobile-first shoppers coming from Instagram.
-- Bangla and English captions on social media.
+- Mobile-first shoppers coming from social media.
 - Prices in Tk (৳).
 - bKash, Nagad, card and cash on delivery.
 - Delivery across Bangladesh, priced inside and outside Dhaka.
-- Seasonal sales, such as the Puja sale of ৳400 off every Recipe 01 shirt.
+- Seasonal sales, such as a Puja offer of ৳400 off every Line 01 piece (sample).
 
 ## Capabilities and Constraints
 
 - Front-end only. Bag, wishlist, filters, quick view, size selection, search, newsletter, account forms and checkout use local state.
-- Checkout ends in a clearly labelled demo confirmation.
-- No real payment processing.
+- Checkout ends in a clearly labelled demo confirmation. No real payment processing.
 
 ## Brand Commitments
 
-These come from ACHAR's Instagram:
-- the name ACHAR, set in wide-tracked caps
-- the pickle-jar silhouette logo on a cream woven label
-- kraft paper bags and boxes printed "Get pickled"
-- the voice: "An acquired taste. A considered fit." and "Recipe 01 — Now serving."
-- the Recipe 01 Boxy Linen Shirt line
-
-Colours seen on Instagram: Oatmeal, Lime, Navy, Sky, Espresso, Butter and Chambray.
+- Name: Northline. Wordmark: **NORTH** bold, LINE light, Urbanist, wide tracking.
+- Mark: one line that draws an N and keeps going north (files in `assets/img/logo/`).
+- Black-dominant palette with white secondary; dark and light themes.
 
 ## Evidence on Hand
 
-- `images/instagram/` holds 12 images downloaded from ACHAR's public Instagram grid on 2026-11-09, with the user's approval. They are only 360–516px wide, and several have text baked in.
-- They confirm the real Recipe 01 line:
-  - Boxy Linen Shirt in Oatmeal and Lime
-  - Boxy Cotton Shirt in Powder Blue and Navy
-  - a Brown shirt, fabric unconfirmed
-  - season "Late summer / Pre-winter"
-  - a ৳400 Puja offer
-  - kraft "Get pickled" bags with jar tags
-- These photos are the product imagery. Ask ACHAR for full-resolution originals.
-
-- `images/` holds 21 editorial streetwear photos and 3 vertical videos (2 identical). These are **not ACHAR products**. They are used only as mood and campaign placeholders until ACHAR supplies real product photography.
-- Some of these photos carry third-party marks (STARSKY LABS, JAYA, AZTREP, OOTD, TREND). They must be replaced before going live.
-- ACHAR's real prices, fabric weights, return policy and reviews are not known. Every price, spec and review on the site is sample content and labelled as such.
+- Northline is fictional. There are no real products, prices, reviews or contact details; all are labelled samples.
+- Product images are crops of third-party mood photography; the films are placeholder footage with a creator's watermark. They must be replaced before any real use.
+- The storefront began as a pitch for the label ACHAR (2026-11-09) and was rebranded on 2026-11-13. ACHAR's photographs were removed and must not be reused under the Northline name.
 
 ## Product Principles
 
 1. Every ecommerce affordance is present and responds, even with no backend behind it.
-2. Colour is the product. Recipe 01 is one shirt in many colours, so colour choice leads.
-3. The brand's pickle world (recipes, jars, labels, kraft) carries the identity, quietly and never as a gimmick.
+2. Pieces lead: each product is one strong garment, shown big.
+3. The brand's line-and-direction idea carries the identity quietly, never as a gimmick.
 4. Phone first.
 5. Never fake real-world claims.

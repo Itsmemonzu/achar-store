@@ -1,5 +1,5 @@
 (function () {
-  const D = window.ACHAR_DATA, S = window.ACHAR_STORE, U = window.ACHAR_UI, SH = window.ACHAR_SHIRT;
+  const D = window.NL_DATA, S = window.NL_STORE, U = window.NL_UI, SH = window.NL_SHIRT;
   const { $, $$, esc } = U;
   const shirts = D.products.filter((p) => p.cat === "shirts");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -8,7 +8,7 @@
 
   /* ---------- Hero: letters part, the film grows (never past its source size) ---------- */
   const hero = $("[data-hero]"), stage = $(".hero__stage"), film = $("[data-film]"), line = $("[data-word-line]");
-  $("[data-hero-shirt]").innerHTML = U.shirt(S.product("r01-oat"));
+  $("[data-hero-shirt]").innerHTML = U.shirt(S.product("nl-tee"));
   let target = 0, cur = 0;
   const readP = () => {
     const total = hero.offsetHeight - stage.offsetHeight;
@@ -33,7 +33,7 @@
   let maxSpread = 0;
   const measureWord = () => {
     /* Centre the H (the middle letter) on the film, not the word as a whole. */
-    const sr0 = stage.getBoundingClientRect(), hr = word.querySelector("span:nth-child(3)").getBoundingClientRect();
+    const sr0 = stage.getBoundingClientRect(), hr = word.querySelector("span:nth-child(5)").getBoundingClientRect();
     const wx = parseFloat(stage.style.getPropertyValue("--wx") || 0);
     stage.style.setProperty("--wx", `${(wx + (sr0.left + sr0.width / 2) - (hr.left + hr.width / 2)).toFixed(1)}px`);
     const w = word.querySelector("span:first-child").getBoundingClientRect();
@@ -54,11 +54,10 @@
   if (reduce) v.pause();
   setPB(v, pb);
 
-  /* ---------- Recipe 01: the five real colours ---------- */
-  $("[data-r2]").innerHTML = shirts.map((p) => U.card(p)).join("");
+  /* ---------- Line 01: every piece ---------- */
+  $("[data-r2]").innerHTML = [...shirts, S.product("gift-card")].map((p) => U.card(p)).join("");
 
-  /* ---------- Explore: mosaic of real colours ---------- */
-
+  
   /* ---------- Film ---------- */
   const fv = $("[data-lazyplay]"), fb = $("[data-film-play]");
   let userPaused = false;
@@ -66,7 +65,7 @@
   fv.addEventListener("play", () => setPB(fv, fb)); fv.addEventListener("pause", () => setPB(fv, fb));
   setPB(fv, fb);
   new IntersectionObserver(([en]) => { if (en.isIntersecting && !reduce && !userPaused) fv.play().catch(() => {}); else fv.pause(); }, { threshold: 0.25 }).observe(fv);
-  $("[data-film-shop]").innerHTML = ["r01-navy", "r01-brown"].map((id) => {
+  $("[data-film-shop]").innerHTML = ["nl-leather", "nl-denim"].map((id) => {
     const p = S.product(id);
     return `<a class="film__item" href="${U.url(p)}"><span class="p">${U.shirt(p)}</span><span><b>${esc(U.title(p))}</b>${U.priceTag(p)}</span><button class="btn btn--sm" data-quick="${p.id}">Add</button></a>`;
   }).join("");
@@ -94,8 +93,11 @@
   showVoice(0);
   if (!reduce) vt = setInterval(() => showVoice((vi + 1) % D.reviews.length), 6000);
 
-  /* ---------- IG (sharpest sources only) ---------- */
-  $("[data-ig]").innerHTML = [3, 4, 5, 6].map((n) => `<a href="https://www.instagram.com/achar.wear/" target="_blank" rel="noopener" aria-label="ACHAR on Instagram"><img src="${D.ig(n)}" alt="" loading="lazy"></a>`).join("");
+  /* ---------- Off the street: close-ups that lead to their piece ---------- */
+  $("[data-ig]").innerHTML = ["nl-jersey", "nl-denim", "nl-work", "nl-hoodie"].map((id) => {
+    const p = S.product(id);
+    return `<a href="${U.url(p)}" aria-label="${esc(U.title(p))}"><img src="${p.imgs[1]}" alt="" loading="lazy"></a>`;
+  }).join("");
 
   /* ---------- Editorial parallax ---------- */
   const pars = $$("[data-par]");

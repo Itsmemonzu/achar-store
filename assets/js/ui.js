@@ -1,9 +1,9 @@
-/* ACHAR shared chrome: band, header, drawers, search, quick view, size guide, toast, footer. */
+/* Northline shared chrome: band, header, drawers, search, quick view, size guide, toast, footer. */
 (function () {
   document.documentElement.classList.add("js");
-  const D = window.ACHAR_DATA;
-  const S = window.ACHAR_STORE;
-  const SH = window.ACHAR_SHIRT;
+  const D = window.NL_DATA;
+  const S = window.NL_STORE;
+  const SH = window.NL_SHIRT;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   /* ---------- Theme: dark by default, light on request ---------- */
@@ -11,7 +11,7 @@
     const root = document.documentElement;
     root.classList.add("theme-anim");
     root.dataset.theme = t;
-    try { localStorage.setItem("achar.theme", t); } catch (e) {}
+    try { localStorage.setItem("northline.theme", t); } catch (e) {}
     const b = document.querySelector("[data-theme-toggle]");
     if (b) b.setAttribute("aria-label", t === "light" ? "Switch to dark mode" : "Switch to light mode");
     const m = document.querySelector('meta[name="theme-color"]');
@@ -20,14 +20,15 @@
   }
   if (!document.documentElement.dataset.theme) {
     let t = "dark";
-    try { t = localStorage.getItem("achar.theme") || "dark"; } catch (e) {}
+    try { t = localStorage.getItem("northline.theme") || "dark"; } catch (e) {}
     document.documentElement.dataset.theme = t;
   }
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  const jar = (cls = "jar") =>
-    `<svg class="${cls}" viewBox="0 0 18 26" aria-hidden="true"><rect x="5" y="0" width="8" height="3.2"/><rect x="6" y="3.2" width="6" height="2"/><path d="M4.5 5.2h9a3 3 0 0 1 3 3V23a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3V8.2a3 3 0 0 1 3-3Z"/></svg>`;
-  const jarOutline = `<svg class="jar-big" viewBox="0 0 18 26" aria-hidden="true"><rect x="5" y="0.6" width="8" height="2.6"/><path d="M4.5 5.2h9a3 3 0 0 1 3 3V23a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3V8.2a3 3 0 0 1 3-3Z"/></svg>`;
+  /* Northline mark: one line that draws an N and keeps going north. */
+  const MARK = "M5 10H7.6V28.5H5ZM5 10H8.55L25.8 28.5H22.25ZM23.2 5.28H25.8V28.5H23.2ZM24.5 2L29.9 7.4L28.06 9.24L24.5 5.68L20.94 9.24L19.1 7.4Z";
+  const mark = (cls = "nl-mark") => `<svg class="${cls}" viewBox="0 0 32 32" aria-hidden="true"><path d="${MARK}"/></svg>`;
+  const markOutline = mark("nl-mark-big");
   const I = {
     search: '<svg class="icon" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>',
     user: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/></svg>',
@@ -53,17 +54,18 @@
     return `<svg class="barcode" viewBox="0 0 ${x} ${h}" preserveAspectRatio="none" aria-hidden="true" fill="currentColor">${out}</svg>`;
   }
 
-  /* Product visual: ACHAR's own photos; Recipe 02 is a typographic placeholder. */
+  /* Product visual: cropped mood photography (placeholder); the gift card and Line 02 are drawn. */
   const shirt = (p, view = "front", cls = "") => {
     if (p.cat === "upcoming") return soonArt(cls);
+    if (p.cat === "gift") return giftArt(cls);
     const src = (view === "back" ? p.imgs[1] : p.imgs[0]) || p.imgs[0];
-    return `<img class="pimg ${cls}" src="${src}" alt="${esc((p.cat === "shirts" ? p.colour + " " + p.name : p.name) + (view === "back" ? ", worn" : ""))}" loading="lazy" decoding="async">`;
+    return `<img class="pimg ${cls}" src="${src}" alt="${esc(title(p) + (view === "back" ? ", close-up" : ""))}" loading="lazy" decoding="async">`;
   };
   function giftArt(cls) {
-    return `<svg class="shirt ${cls}" viewBox="0 0 400 460" aria-hidden="true"><ellipse cx="200" cy="420" rx="120" ry="10" fill="#000" opacity=".08"/><rect x="110" y="110" width="180" height="300" rx="22" fill="#c4a27a"/><rect x="132" y="70" width="136" height="48" rx="8" fill="#a9865e"/><rect x="110" y="190" width="180" height="120" fill="#f4efe4"/><g transform="translate(186 215) scale(1.6)" fill="#1d1c19"><rect x="5" y="0" width="8" height="3.2"/><rect x="6" y="3.2" width="6" height="2"/><path d="M4.5 5.2h9a3 3 0 0 1 3 3V23a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3V8.2a3 3 0 0 1 3-3Z"/></g><text x="200" y="292" text-anchor="middle" font-family="Urbanist,sans-serif" font-size="13" letter-spacing="5" fill="#1d1c19">GIFT JAR</text></svg>`;
+    return `<svg class="shirt ${cls}" viewBox="0 0 400 460" aria-hidden="true"><ellipse cx="200" cy="392" rx="130" ry="10" fill="#000" opacity=".1"/><g transform="rotate(-6 200 230)"><rect x="70" y="146" width="260" height="164" rx="14" fill="#141414"/><g transform="translate(94 168) scale(1.5)" fill="#f2f0eb"><path d="${MARK}"/></g><text x="96" y="284" font-family="Urbanist,sans-serif" font-size="15" letter-spacing="5" fill="#f2f0eb"><tspan font-weight="700">NORTH</tspan><tspan font-weight="250">LINE</tspan></text><text x="306" y="284" text-anchor="end" font-family="Urbanist,sans-serif" font-size="10" letter-spacing="3" fill="#a9a59c">GIFT CARD</text></g></svg>`;
   }
   function soonArt(cls) {
-    return `<svg class="shirt ${cls}" viewBox="0 0 400 460" aria-hidden="true"><ellipse cx="200" cy="420" rx="120" ry="10" fill="#000" opacity=".08"/><rect x="110" y="110" width="180" height="300" rx="22" fill="#26241f"/><rect x="132" y="70" width="136" height="48" rx="8" fill="#3a3731"/><text x="200" y="262" text-anchor="middle" font-family="Urbanist,sans-serif" font-weight="200" font-size="64" fill="#f2efe8">02</text><text x="200" y="300" text-anchor="middle" font-family="Urbanist,sans-serif" font-size="12" letter-spacing="5" fill="#a9a59c">FERMENTING</text></svg>`;
+    return `<svg class="shirt ${cls}" viewBox="0 0 400 460" aria-hidden="true"><ellipse cx="200" cy="410" rx="120" ry="10" fill="#000" opacity=".08"/><rect x="100" y="66" width="200" height="320" rx="18" fill="#1b1a16"/><g transform="translate(184 104)" fill="#8f8a80"><path d="${MARK}"/></g><text x="200" y="262" text-anchor="middle" font-family="Urbanist,sans-serif" font-weight="200" font-size="96" fill="#f2ece0">02</text><text x="200" y="316" text-anchor="middle" font-family="Urbanist,sans-serif" font-size="13" letter-spacing="5" fill="#8f8a80">LINE 02</text></svg>`;
   }
 
   /* Payment method badges: typographic stand-ins in each brand's colours. */
@@ -84,14 +86,16 @@
   const priceTag = (p) =>
     p.price == null ? `<span class="price">Coming soon</span>` :
     p.was ? `<span class="price"><s>${S.tk(p.was)}</s><span class="now">${S.tk(p.price)}</span></span>` : `<span class="price">${S.tk(p.price)}</span>`;
-  const title = (p) => (p.cat === "shirts" ? `${p.colour} ${p.name.replace(/^Boxy /, "")}` : p.name);
+  const title = (p) => (p.cat === "shirts" ? `${p.colour} ${p.name}` : p.name);
   const url = (p) => `product.html?id=${encodeURIComponent(p.id)}`;
   const shirts = () => D.products.filter((p) => p.cat === "shirts");
 
   function card(p) {
     const tag = p.tag === "new" ? `<span class="tile__tag">New</span>` : p.tag === "soon" ? `<span class="tile__tag">Soon</span>` : p.was ? `<span class="tile__tag tile__tag--sale">Sale</span>` : "";
     const add = p.price == null ? `<button class="btn btn--sm tile__add" data-notify="${p.id}">Notify me</button>` : `<button class="btn btn--sm tile__add" data-quick="${p.id}" aria-label="Quick add ${esc(title(p))}"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Quick add</span></button>`;
-    const dots = p.cat === "shirts" ? `<div class="dots">${shirts().map((s) => `<a class="dot" href="${url(s)}" style="--c:${s.hex}" aria-label="${s.colour}" ${s.id === p.id ? 'aria-pressed="true"' : ""}></a>`).join("")}</div>` : "";
+    /* colour dots only when the same piece comes in more than one colour */
+    const sibs = p.cat === "shirts" ? shirts().filter((s) => s.name === p.name) : [];
+    const dots = sibs.length > 1 ? `<div class="dots">${sibs.map((s) => `<a class="dot" href="${url(s)}" style="--c:${s.hex}" aria-label="${s.colour}" ${s.id === p.id ? 'aria-pressed="true"' : ""}></a>`).join("")}</div>` : "";
     return `<article class="tile" data-id="${p.id}">
       <div class="tile__top">
         <a class="tile__media" href="${url(p)}" aria-label="${esc(title(p))}">
@@ -102,7 +106,7 @@
         ${add}
       </div>
       <div class="tile__info">
-        <span class="tile__brand">ACHAR · ${p.cat === "shirts" ? "Recipe " + p.recipe : p.cat === "gift" ? "Gift" : "Next"}</span>
+        <span class="tile__brand">Northline · ${p.cat === "shirts" ? "Line " + p.line : p.cat === "gift" ? "Gift" : "Next"}</span>
         <a class="tile__name" href="${url(p)}">${esc(title(p))}</a>
         ${priceTag(p)}
         ${dots}
@@ -111,8 +115,8 @@
   }
 
   /* ---------- Chrome ---------- */
-  const bandItems = ["Recipe 01 — Now serving", `৳${D.SALE} off every Recipe 01 shirt · sample offer`, "Delivering across Bangladesh", "Cash on delivery · bKash · Nagad"];
-  const bandRun = bandItems.map((t) => `<span class="band__item">${t}${jar()}</span>`).join("");
+  const bandItems = ["Line 01 — Out now", `৳${D.SALE} off every Line 01 piece · sample offer`, "Delivering across Bangladesh", "Cash on delivery · bKash · Nagad"];
+  const bandRun = bandItems.map((t) => `<span class="band__item">${t}${mark()}</span>`).join("");
   const page = document.body.dataset.page || "";
   const navLink = (href, label, key, cls = "") => `<a class="${cls}" href="${href}" ${page === key ? 'aria-current="page"' : ""}>${label}</a>`;
 
@@ -126,11 +130,11 @@
         <nav class="nav" aria-label="Primary">
           ${navLink("shop.html", "Shop", "shop")}
           ${navLink("lookbook.html", "Lookbook", "look")}
-          ${navLink("about.html", "The Recipe", "about")}
+          ${navLink("about.html", "Our Story", "about")}
           ${navLink("sale.html", "Sale", "sale", "is-sale")}
         </nav>
       </div>
-      <a class="brand" href="index.html" aria-label="ACHAR home">${jar()}<span class="brand__word">ACHAR</span></a>
+      <a class="brand" href="index.html" aria-label="Northline home">${mark()}<span class="brand__word"><b>NORTH</b>LINE</span></a>
       <div class="header__right">
         <button class="cur hide-mobile" data-cur aria-label="Currency: BDT">BDT ${I.chev}</button>
         <button class="icon-btn theme-btn" data-theme-toggle aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button>
@@ -154,19 +158,19 @@
     <div class="drawer__body" data-wish-lines></div>
   </aside>
   <aside class="drawer drawer--left" id="menu" aria-label="Menu" aria-hidden="true">
-    <div class="drawer__head"><a class="brand" href="index.html">${jar()}<span class="brand__word">ACHAR</span></a><button class="icon-btn" data-close aria-label="Close menu">${I.close}</button></div>
+    <div class="drawer__head"><a class="brand" href="index.html">${mark()}<span class="brand__word"><b>NORTH</b>LINE</span></a><button class="icon-btn" data-close aria-label="Close menu">${I.close}</button></div>
     <div class="menu__bg" aria-hidden="true"><img src="assets/img/look-02.jpg" alt="" data-menu-bg></div>
     <div class="drawer__body menu">
       <nav aria-label="Menu">
-        ${[["shop.html", "Shop all", "assets/img/look-02.jpg"], ["lookbook.html", "Lookbook", "assets/img/look-01.jpg"], ["sale.html", "Sale", "assets/img/p/ig-08.jpg"], ["about.html", "The Recipe", "assets/img/look-13.jpg"], ["help.html", "Help & delivery", "assets/img/p/ig-06.jpg"], ["account.html", "Account", "assets/img/look-15.jpg"]].map(([h, t, im], i) => `<a href="${h}" class="menu__link" style="--i:${i}" data-menu-img="${im}">${t}</a>`).join("")}
+        ${[["shop.html", "Shop all", "assets/img/p/nl-tee-1.jpg"], ["lookbook.html", "Lookbook", "assets/img/p/nl-jersey-1.jpg"], ["sale.html", "Sale", "assets/img/p/nl-blazer-1.jpg"], ["about.html", "Our Story", "assets/img/p/nl-leather-1.jpg"], ["help.html", "Help & delivery", "assets/img/p/nl-denim-1.jpg"], ["account.html", "Account", "assets/img/p/nl-hoodie-1.jpg"]].map(([h, t, im], i) => `<a href="${h}" class="menu__link" style="--i:${i}" data-menu-img="${im}">${t}</a>`).join("")}
       </nav>
     </div>
   </aside>
   <div class="search" id="search" role="dialog" aria-label="Search" aria-hidden="true">
     <div class="wrap">
-      <div class="search__bar">${I.search}<input type="search" placeholder="Search ACHAR" aria-label="Search products" data-search-input><button class="icon-btn" data-close aria-label="Close search">${I.close}</button></div>
+      <div class="search__bar">${I.search}<input type="search" placeholder="Search Northline" aria-label="Search products" data-search-input><button class="icon-btn" data-close aria-label="Close search">${I.close}</button></div>
       <div class="search__res">
-        <div class="search__sug"><span class="t-cap" style="color:var(--grey)">Popular</span>${["Navy", "Lime", "Oatmeal", "Office", "Gift", "Recipe 02"].map((t) => `<button data-sug="${t}">${t}</button>`).join("")}</div>
+        <div class="search__sug"><span class="t-cap" style="color:var(--grey)">Popular</span>${["Black", "Jacket", "Denim", "Office", "Gift", "Line 02"].map((t) => `<button data-sug="${t}">${t}</button>`).join("")}</div>
         <div><p class="t-small" data-search-meta style="margin-bottom:14px">Everything</p><div class="search__grid" data-search-grid></div></div>
       </div>
     </div>
@@ -179,26 +183,26 @@
     <div class="wrap">
       <div class="footer__top">
         <div>
-          <h4 class="t-cap">Be first to taste Recipe 02</h4>
-          <p style="max-width:36ch;color:var(--ink-2);font-size:15px">One email when the next jar opens. Nothing else.</p>
+          <h4 class="t-cap">Be first to see Line 02</h4>
+          <p style="max-width:36ch;color:var(--ink-2);font-size:15px">One email when the next line drops. Nothing else.</p>
           <form class="news" data-news novalidate><input type="email" placeholder="Your email" aria-label="Email address" required><button class="btn btn--sm" type="submit">Subscribe</button></form>
           <p class="msg" data-news-msg aria-live="polite"></p>
         </div>
-        <div><h4 class="t-cap">Shop</h4><ul><li><a href="shop.html">All</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="sale.html">Sale</a></li><li><a href="shop.html?cat=gift">Gift Jar</a></li></ul></div>
+        <div><h4 class="t-cap">Shop</h4><ul><li><a href="shop.html">All</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="sale.html">Sale</a></li><li><a href="shop.html?cat=gift">Gift Card</a></li></ul></div>
         <div><h4 class="t-cap">Help</h4><ul><li><a href="help.html#size">Size guide</a></li><li><a href="help.html#delivery">Delivery &amp; COD</a></li><li><a href="help.html#payments">Payments</a></li><li><a href="help.html#exchange">Exchanges</a></li><li><a href="account.html">Track an order</a></li></ul></div>
-        <div><h4 class="t-cap">ACHAR</h4><ul><li><a href="about.html">The Recipe</a></li><li><a href="https://www.instagram.com/achar.wear/" target="_blank" rel="noopener">Instagram</a></li><li><a href="help.html#contact">Contact</a></li></ul></div>
+        <div><h4 class="t-cap">Northline</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="lookbook.html">Lookbook</a></li><li><a href="help.html#contact">Contact</a></li></ul></div>
       </div>
     </div>
-    <div class="footer__word" aria-hidden="true">${jar()}ACHAR</div>
+    <div class="footer__word" aria-hidden="true">${mark()}<span><b>NORTH</b>LINE</span></div>
   </footer>
   <div class="signoff" role="contentinfo">
     <div class="wrap signoff__in">
-      <span class="signoff__brand">${jar()}<b>ACHAR</b><span class="bn" lang="bn">আচার</span></span>
-      <span class="signoff__tag">An acquired taste. A considered fit.</span>
-      <span class="signoff__right"><a href="https://www.instagram.com/achar.wear/" target="_blank" rel="noopener">@achar.wear</a><span>Dhaka, Bangladesh</span></span>
+      <span class="signoff__brand">${mark()}<b>NORTH<i>LINE</i></b><span class="coord">23.8° N</span></span>
+      <span class="signoff__tag">Clean lines. Considered fit.</span>
+      <span class="signoff__right"><span>Designed in Dhaka, Bangladesh</span></span>
     </div>
     <div class="wrap signoff__bot">
-      <span>© 2026 ACHAR · Made in Bangladesh · Demo storefront: no orders are placed, prices are samples.</span>
+      <span>© 2026 Northline · A concept brand for a demo storefront: no orders are placed, prices are samples.</span>
       <span class="footer__pay"><span>Payments by</span>${payBadges(["ssl", "bkash", "nagad", "rocket", "visa", "mc", "amex", "cod"])}</span>
     </div>
   </div>`;
@@ -266,7 +270,7 @@
     const body = $("[data-bag-lines]"), foot = $("[data-bag-foot]");
     $("[data-bag-count-text]").textContent = lines.length ? `(${S.count()})` : "";
     if (!lines.length) {
-      body.innerHTML = `<div class="empty">${jarOutline}<p class="t-h3">Your bag is empty</p><p class="t-small">Recipe 01 comes in five colours.</p><a class="btn" href="shop.html">Shop the recipe</a></div>`;
+      body.innerHTML = `<div class="empty">${markOutline}<p class="t-h3">Your bag is empty</p><p class="t-small">Line 01 has seven pieces.</p><a class="btn" href="shop.html">Shop Line 01</a></div>`;
       foot.style.display = "none";
       return;
     }
@@ -344,7 +348,7 @@
   /* ---------- Search ---------- */
   function renderSearch(q) {
     const t = q.trim().toLowerCase();
-    const res = D.products.filter((p) => !t || [p.name, p.colour, p.notes, p.cat, "recipe " + p.recipe, ...(p.vibe || [])].join(" ").toLowerCase().includes(t));
+    const res = D.products.filter((p) => !t || [p.name, p.colour, p.type || "", p.notes, p.cat, "line " + p.line, ...(p.vibe || [])].join(" ").toLowerCase().includes(t));
     $("[data-search-meta]").textContent = t ? `${res.length} result${res.length === 1 ? "" : "s"} for “${q}”` : "Everything";
     $("[data-search-grid]").innerHTML = res.length
       ? res.map((p) => `<a href="${url(p)}"><span class="p">${shirt(p)}</span><span style="display:flex;justify-content:space-between;gap:8px;font-size:14px;margin-top:10px"><span>${esc(title(p))}</span>${p.price ? `<span style="color:var(--grey)">${S.tk(p.price)}</span>` : ""}</span></a>`).join("")
@@ -377,7 +381,7 @@
   function sizeGuideHTML() {
     return `<div style="padding:36px clamp(20px,4vw,40px) 36px">
       <h2 class="t-h2" style="font-size:28px;margin-bottom:10px">Size guide</h2>
-      <p style="color:var(--ink-2);margin-bottom:22px;max-width:52ch">Recipe 01 is cut boxy: wide through the body with a dropped shoulder. Prefer it closer? Take one size down. Inches, garment laid flat (sample chart).</p>
+      <p style="color:var(--ink-2);margin-bottom:22px;max-width:52ch">Line 01 is cut boxy: wide through the body with a dropped shoulder. Prefer it closer? Take one size down. Inches, garment laid flat (sample chart).</p>
       <table class="sizetable"><thead><tr>${D.sizeChart.head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${D.sizeChart.rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:26px">
         <div class="fld"><label for="sg-h">Your height (cm)</label><input class="inp" id="sg-h" type="number" inputmode="numeric" placeholder="e.g. 172"></div>
@@ -407,7 +411,7 @@
     openModal(`<div class="qv">
       <div class="qv__art">${shirt(p)}</div>
       <div class="qv__info">
-        <p class="tile__brand">ACHAR · ${p.cat === "shirts" ? "Recipe " + p.recipe : esc(p.colour)}</p>
+        <p class="tile__brand">Northline · ${p.cat === "shirts" ? "Line " + p.line : esc(p.colour)}</p>
         <h2 style="font-size:28px;font-weight:400;line-height:1.15">${esc(title(p))}</h2>
         ${priceTag(p)}
         <p style="color:var(--ink-2)">${esc(p.notes)}</p>
@@ -422,17 +426,17 @@
   document.head.appendChild(qcss);
 
   const INFO = {
-    returns: ["Exchanges", "Sample policy: exchange any unworn Recipe 01 shirt for another size or colour within 7 days. Inside Dhaka, we pick it up from your door."],
+    returns: ["Exchanges", "Sample policy: exchange any unworn Line 01 piece for another size within 7 days. Inside Dhaka, we pick it up from your door."],
     delivery: ["Delivery & COD", "Inside Dhaka 1–2 days (৳70), outside Dhaka 3–5 days (৳130). Free in Dhaka over ৳4,000. Pay cash on delivery, bKash, Nagad or card. All fees are samples for the pitch."],
-    about: ["The recipe", "ACHAR means pickle. Good achar takes time, the right ingredients, and a little patience. So do our clothes: one considered shirt, cut boxy, in colours you can almost taste. Recipe 01 is now serving."],
-    contact: ["Contact", "DM us on Instagram @achar.wear. Phone, email and address to be added by the client."],
+    about: ["Our story", "Northline is named for a line on the map: 23.8° north, the latitude that runs through Dhaka, where every piece is drawn. Fewer things, cut properly, made to be worn for years. Line 01 is out now."],
+    contact: ["Contact", "Phone, email and Instagram to be added. Northline is a concept brand for this demo storefront."],
   };
 
   document.addEventListener("click", (e) => {
     const o = e.target.closest("[data-open]");
     if (o) { e.preventDefault(); open(o.dataset.open); return; }
     if (e.target.closest("[data-close]")) { close(); return; }
-    if (e.target.closest("[data-cur]")) { toast("Prices shown in BDT (৳). Other currencies when ACHAR ships abroad."); return; }
+    if (e.target.closest("[data-cur]")) { toast("Prices shown in BDT (৳). Other currencies when Northline ships abroad."); return; }
     if (e.target.closest("[data-theme-toggle]")) { setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light"); return; }
     const w = e.target.closest("[data-wish]");
     if (w) { e.preventDefault(); const on = S.toggleWish(w.dataset.wish); const p = S.product(w.dataset.wish); toast(on ? `Saved ${esc(title(p))} <a href="#" data-open="wish">View</a>` : `Removed ${esc(title(p))}`); return; }
@@ -452,7 +456,7 @@
       return;
     }
     const n = e.target.closest("[data-notify]");
-    if (n) { e.preventDefault(); openModal(`<form style="padding:40px clamp(20px,4vw,40px)" data-notify-form><h2 class="t-h2" style="font-size:28px;margin-bottom:12px">Get told first</h2><p style="color:var(--ink-2);margin-bottom:20px">Recipe 02 is still fermenting. One message when it's ready.</p><div class="fld"><label for="nt-e">Email or phone</label><input class="inp" id="nt-e" required placeholder="you@email.com or 01XXXXXXXXX"></div><button class="btn btn--block" style="margin-top:16px">Notify me</button><p class="t-small msg" style="margin-top:12px" aria-live="polite"></p></form>`, true); return; }
+    if (n) { e.preventDefault(); openModal(`<form style="padding:40px clamp(20px,4vw,40px)" data-notify-form><h2 class="t-h2" style="font-size:28px;margin-bottom:12px">Get told first</h2><p style="color:var(--ink-2);margin-bottom:20px">Line 02 is still on the drawing board. One message when it drops.</p><div class="fld"><label for="nt-e">Email or phone</label><input class="inp" id="nt-e" required placeholder="you@email.com or 01XXXXXXXXX"></div><button class="btn btn--block" style="margin-top:16px">Notify me</button><p class="t-small msg" style="margin-top:12px" aria-live="polite"></p></form>`, true); return; }
     const sg = e.target.closest("[data-size-guide]");
     if (sg) { e.preventDefault(); openModal(sizeGuideHTML(), true); bindSizeGuide(); return; }
     const inf = e.target.closest("[data-info]");
@@ -575,10 +579,10 @@
 
   /* ---------- Demo notice ---------- */
   let demoGone = false;
-  try { demoGone = sessionStorage.getItem("achar.demo") === "1"; } catch (e) {}
+  try { demoGone = sessionStorage.getItem("northline.demo") === "1"; } catch (e) {}
   if (!demoGone) {
     document.body.insertAdjacentHTML("beforeend", `<div class="demo-pill" role="note"><i></i><span>Demo store<em> · nothing is charged</em></span><button aria-label="Dismiss demo notice" data-demo-x>${I.close.replace('class="icon"', 'class="icon" style="width:14px;height:14px"')}</button></div>`);
-    $("[data-demo-x]").addEventListener("click", () => { $(".demo-pill").classList.add("is-gone"); try { sessionStorage.setItem("achar.demo", "1"); } catch (e) {} });
+    $("[data-demo-x]").addEventListener("click", () => { $(".demo-pill").classList.add("is-gone"); try { sessionStorage.setItem("northline.demo", "1"); } catch (e) {} });
     const so = $(".signoff");
     if (so) new IntersectionObserver(([en]) => $(".demo-pill").classList.toggle("is-tucked", en.isIntersecting)).observe(so);
     /* Phones: keep the hero buttons clear; the notice slides in once the hero is scrolled past. */
@@ -586,5 +590,5 @@
     if (heroEl && matchMedia("(max-width: 700px)").matches) new IntersectionObserver(([en]) => $(".demo-pill").classList.toggle("is-hero", en.isIntersecting), { rootMargin: "0px 0px -60% 0px" }).observe(heroEl);
   }
 
-  window.ACHAR_UI = { $, $$, esc, jar, jarOutline, I, barcode, shirt, card, priceTag, title, url, open, close, toast, quickView, openModal, closeModal, sizeGuideHTML, bindSizeGuide, watchReveal, watchAll, bindRail, flyToBag, check, payBadges, get lenis() { return lenis; } };
+  window.NL_UI = { $, $$, esc, mark, markOutline, MARK, I, barcode, shirt, card, priceTag, title, url, open, close, toast, quickView, openModal, closeModal, sizeGuideHTML, bindSizeGuide, watchReveal, watchAll, bindRail, flyToBag, check, payBadges, get lenis() { return lenis; } };
 })();

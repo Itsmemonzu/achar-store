@@ -1,5 +1,5 @@
 (function () {
-  const D = window.ACHAR_DATA, S = window.ACHAR_STORE, U = window.ACHAR_UI;
+  const D = window.NL_DATA, S = window.NL_STORE, U = window.NL_UI;
   const { $, $$, esc } = U;
   let step = 0, promo = 0, sealed = -1;
   const ship = { inside: { label: "Inside Dhaka", eta: "1–2 days", fee: 70 }, outside: { label: "Outside Dhaka", eta: "3–5 days", fee: 130 }, express: { label: "Same-day, Dhaka only", eta: "Today, if ordered before 2pm", fee: 150 } };
@@ -29,7 +29,7 @@
     U.openModal(`<div class="gw">
       <div class="gw__bar"><span class="gw__logo"><svg width="14" height="16" viewBox="0 0 10 12" aria-hidden="true"><rect x="1" y="5" width="8" height="7" rx="1.5" fill="#fff"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" fill="none" stroke="#fff" stroke-width="1.4"/></svg>SSL<b>COMMERZ</b></span><span class="gw__sand">Sandbox preview</span></div>
       <div class="gw__warn"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17v.01"/></svg><span><b>DEMO — no real payment.</b> This screen imitates a payment page for the pitch. It is not connected to SSLCOMMERZ. Do not enter real card, PIN or OTP details.</span></div>
-      <div class="gw__merchant"><span class="gw__m">${U.jar()}</span><span><b>ACHAR</b><small>achar.wear · Order total</small></span><span class="gw__amt">${amt}</span></div>
+      <div class="gw__merchant"><span class="gw__m">${U.mark()}</span><span><b>NORTHLINE</b><small>Northline · Order total</small></span><span class="gw__amt">${amt}</span></div>
       <div class="gw__tabs" role="tablist"><button role="tab" aria-selected="true" data-gt="mobile">Mobile banking</button><button role="tab" aria-selected="false" data-gt="card">Cards</button><button role="tab" aria-selected="false" data-gt="net">Net banking</button></div>
       <div class="gw__pane" data-gp="mobile"><div class="gw__grid">${["bkash", "nagad", "rocket", "upay"].map((k) => `<button class="gw__m-opt" data-gm="${k}" aria-pressed="false">${U.payBadges([k])}</button>`).join("")}</div></div>
       <div class="gw__pane" data-gp="card" hidden>
@@ -72,13 +72,13 @@
 
   function lines() {
     const ls = S.bag();
-    $("[data-sum-lines]").innerHTML = ls.length ? ls.map((l) => `<div class="co__sl"><span class="co__thumb">${U.shirt(l.p)}<i>${l.qty}</i></span><span>${esc(l.p.cat === "shirts" ? l.p.colour + " Linen Shirt" : l.p.name)}<small>Size ${esc(l.size)}</small></span><span>${S.tk(l.p.price * l.qty)}</span></div>`).join("") : `<p style="color:var(--grey)">Empty</p>`;
+    $("[data-sum-lines]").innerHTML = ls.length ? ls.map((l) => `<div class="co__sl"><span class="co__thumb">${U.shirt(l.p)}<i>${l.qty}</i></span><span>${esc(U.title(l.p))}<small>Size ${esc(l.size)}</small></span><span>${S.tk(l.p.price * l.qty)}</span></div>`).join("") : `<p style="color:var(--grey)">Empty</p>`;
     $("[data-co-lines]").innerHTML = ls.length
       ? ls.map((l) => {
           const k = l.id + "|" + l.size;
-          return `<div class="bag-line" style="grid-template-columns:110px 1fr"><a class="bag-line__img" href="${U.url(l.p)}" style="width:110px">${U.shirt(l.p)}</a><div><div class="bag-line__top"><h4>${esc(l.p.cat === "shirts" ? l.p.colour + " Boxy Linen Shirt" : l.p.name)}</h4>${U.priceTag({ ...l.p, price: l.p.price * l.qty, was: l.p.was ? l.p.was * l.qty : null })}</div><p class="meta">Size ${esc(l.size)}</p><div class="bag-line__ctl"><div class="qty" role="group" aria-label="Quantity"><button data-q="-1" data-k="${k}" aria-label="Decrease">−</button><output>${l.qty}</output><button data-q="1" data-k="${k}" aria-label="Increase">+</button></div><button class="remove" data-rm="${k}">Remove</button></div></div></div>`;
+          return `<div class="bag-line" style="grid-template-columns:110px 1fr"><a class="bag-line__img" href="${U.url(l.p)}" style="width:110px">${U.shirt(l.p)}</a><div><div class="bag-line__top"><h4>${esc(U.title(l.p))}</h4>${U.priceTag({ ...l.p, price: l.p.price * l.qty, was: l.p.was ? l.p.was * l.qty : null })}</div><p class="meta">Size ${esc(l.size)}</p><div class="bag-line__ctl"><div class="qty" role="group" aria-label="Quantity"><button data-q="-1" data-k="${k}" aria-label="Decrease">−</button><output>${l.qty}</output><button data-q="1" data-k="${k}" aria-label="Increase">+</button></div><button class="remove" data-rm="${k}">Remove</button></div></div></div>`;
         }).join("")
-      : `<div class="empty">${U.jarOutline}<p class="t-h3">Your bag is empty</p><a class="btn" href="shop.html">Shop Recipe 01</a></div>`;
+      : `<div class="empty">${U.markOutline}<p class="t-h3">Your bag is empty</p><a class="btn" href="shop.html">Shop Line 01</a></div>`;
     $("[data-step='0'] [data-next]").disabled = !ls.length;
   }
   function totals() {
@@ -87,7 +87,7 @@
     const f = fee();
     $("[data-sum-totals]").innerHTML = `<div><span>Subtotal</span><span>${S.tk(sub)}</span></div>
       ${S.savings() ? `<div class="save"><span>Puja saving included</span><span>${S.tk(S.savings())}</span></div>` : ""}
-      ${off ? `<div class="save"><span>GETPICKLED</span><span>−${S.tk(off)}</span></div>` : ""}
+      ${off ? `<div class="save"><span>KEEPNORTH</span><span>−${S.tk(off)}</span></div>` : ""}
       <div><span>Delivery</span><span>${step >= 1 ? (f ? S.tk(f) : "Free") : "Next step"}</span></div>
       <div class="grand"><span>Total</span><span>${S.tk(grand())}</span></div>`;
     $("[data-place-total]").textContent = S.tk(grand());
@@ -97,7 +97,7 @@
   $("[data-promo]").addEventListener("submit", (e) => {
     e.preventDefault();
     const v = $("[data-promo-in]").value.trim().toUpperCase();
-    if (v === "GETPICKLED") { promo = 0.1; $("[data-promo-msg]").textContent = "Applied: 10% off (demo code)"; $("[data-promo-msg]").style.color = "var(--sale)"; }
+    if (v === "KEEPNORTH") { promo = 0.1; $("[data-promo-msg]").textContent = "Applied: 10% off (demo code)"; $("[data-promo-msg]").style.color = "var(--sale)"; }
     else { promo = 0; $("[data-promo-msg]").textContent = v ? `“${v}” isn't a valid code. Check the spelling.` : "Enter a code first."; $("[data-promo-msg]").style.color = ""; }
     totals();
   });
@@ -135,7 +135,7 @@
   });
 
   function printLabel() {
-    const code = "ACH-" + Date.now().toString(36).toUpperCase().slice(-7);
+    const code = "NL-" + Date.now().toString(36).toUpperCase().slice(-7);
     const pay = $('input[name="pay"]:checked').value;
     const payTxt = pay === "cod" ? `Cash on delivery · ${S.tk(grand())}` : `Paid via SSLCOMMERZ · ${esc(paidWith)} (demo)`;
     const items = S.bag();
@@ -146,11 +146,11 @@
       <div>
         <p class="t-cap" style="color:var(--grey)">Order confirmed</p>
         <h2 class="t-hero co__done-h" style="margin-top:14px">Thank you,<br>${esc(first)}</h2>
-        <p class="co__done-p">Your shirt is being folded into its kraft box. We'll send an SMS when it's on the road. <span class="t-small">(Demo: no order was placed and nothing was charged.)</span></p>
+        <p class="co__done-p">Your order is being folded into its black mailer. We'll send an SMS when it's on the road. <span class="t-small">(Demo: no order was placed and nothing was charged.)</span></p>
         <div class="co__actions" style="justify-content:flex-start;gap:10px;margin-top:0"><a class="btn" href="account.html">Track order</a><button class="btn btn--ghost" data-print>Print slip</button><a class="link" href="index.html">Keep shopping</a></div>
       </div>
       <div class="slip">
-        <div class="slip__top"><span class="brand">${U.jar()}<span class="brand__word" style="font-size:13px">ACHAR</span></span><span class="slip__code">${code}</span></div>
+        <div class="slip__top"><span class="brand">${U.mark()}<span class="brand__word" style="font-size:13px"><b>NORTH</b>LINE</span></span><span class="slip__code">${code}</span></div>
         <div class="slip__items">${items.map((l) => `<span title="${esc(U.title(l.p))}, ${esc(l.size)}">${U.shirt(l.p)}</span>`).join("")}</div>
         <div class="slip__grid">
           <div><small>Ship to</small>${esc($("#f-name").value)}<br>${esc($("#f-phone").value)}<br>${esc($("#f-addr").value)}, ${esc($("[data-dist]").value)}</div>

@@ -1,7 +1,7 @@
 /* Front-end only state: bag + wishlist in localStorage. Nothing is sent anywhere. */
-window.ACHAR_STORE = (function () {
-  const KEY_BAG = "achar.bag.v1";
-  const KEY_WISH = "achar.wish.v1";
+window.NL_STORE = (function () {
+  const KEY_BAG = "northline.bag.v1";
+  const KEY_WISH = "northline.wish.v1";
   const listeners = new Set();
 
   const read = (k, d) => {
@@ -14,7 +14,7 @@ window.ACHAR_STORE = (function () {
   let bag = read(KEY_BAG, []);
   let wish = read(KEY_WISH, []);
 
-  const byId = (id) => window.ACHAR_DATA.products.find((p) => p.id === id);
+  const byId = (id) => window.NL_DATA.products.find((p) => p.id === id);
   const emit = (type, detail) => {
     write(KEY_BAG, bag);
     write(KEY_WISH, wish);

@@ -1,6 +1,6 @@
-/* ACHAR Recipe 01 — authored SVG illustration of the boxy linen shirt.
+/* Legacy authored SVG shirt illustration (unused by the Northline catalogue, kept for reference).
    One drawing, recoloured per product. Views: "front", "back". */
-window.ACHAR_SHIRT = (function () {
+window.NL_SHIRT = (function () {
   let n = 0;
   const lum = (hex) => {
     const h = hex.replace("#", "");

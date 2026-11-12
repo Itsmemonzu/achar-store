@@ -1,9 +1,9 @@
 /* ---------- Hero: wordmark parts around a sharp portrait film ---------- */
 .hero { position: relative; height: 210vh; }
 .hero__stage { position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); height: calc(100svh - var(--header-h)); overflow: hidden; display: grid; place-items: center; background: var(--paper); }
-.hero__word { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 0; font-weight: 800; font-size: clamp(110px, 19vw, 340px); letter-spacing: -0.02em; line-height: 1; color: var(--ink); z-index: 1; pointer-events: none; user-select: none; }
+.hero__word { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 0; font-weight: 800; font-size: clamp(64px, 11.5vw, 210px); letter-spacing: -0.02em; line-height: 1; color: var(--ink); z-index: 1; pointer-events: none; user-select: none; }
 .hero__word span { display: inline-block; transform: translate3d(calc(var(--k) * var(--spread, 0) * 1px), 0, 0); opacity: var(--wo, 1); will-change: transform; }
-.hero__word span:nth-child(1) { --k: -2.2; } .hero__word span:nth-child(2) { --k: -1.1; } .hero__word span:nth-child(3) { --k: 0; } .hero__word span:nth-child(4) { --k: 1.1; } .hero__word span:nth-child(5) { --k: 2.2; }
+.hero__word span:nth-child(1) { --k: -2.2; } .hero__word span:nth-child(2) { --k: -1.65; } .hero__word span:nth-child(3) { --k: -1.1; } .hero__word span:nth-child(4) { --k: -.55; } .hero__word span:nth-child(5) { --k: 0; } .hero__word span:nth-child(6) { --k: .55; } .hero__word span:nth-child(7) { --k: 1.1; } .hero__word span:nth-child(8) { --k: 1.65; } .hero__word span:nth-child(9) { --k: 2.2; }
 .hero__film { position: relative; z-index: 2; margin: 0; height: 96%; aspect-ratio: 9 / 16; border-radius: var(--frs, 24px); overflow: hidden; background: #0b0b0a; isolation: isolate; transform: scale(var(--fs, .86)) translateZ(0); transform-origin: 50% 50%; backface-visibility: hidden; box-shadow: 0 50px 100px -40px rgba(0,0,0,.45); will-change: transform; }
 .hero__film video { width: 100%; height: 100%; object-fit: cover; }
 .hero__play { position: absolute; right: 12px; bottom: 12px; color: #fff; background: rgba(0,0,0,.3); }
@@ -26,11 +26,11 @@
 /* ---------- Intro ---------- */
 .intro__in { display: grid; justify-items: center; gap: 22px; text-align: center; }
 .intro__bn { display: flex; gap: 10px; align-items: baseline; }
-.intro__bn .bn { font-size: 30px; }
+.intro__bn .coord { font-size: 30px; font-weight: 300; letter-spacing: .06em; }
 .intro .lede { margin: 0 auto; }
 .intro .t-h2 { max-width: 22ch; }
 
-/* ---------- Recipe 01 (black) ---------- */
+/* ---------- Line rail (black, legacy) ---------- */
 .recipe { overflow: hidden; }
 .recipe__in { display: grid; grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: end; }
 .recipe__head { display: grid; gap: 20px; align-content: end; padding-bottom: 64px; }
@@ -127,12 +127,12 @@
 .ig__grid a:hover img { transform: scale(1.06); }
 @media (max-width: 700px) { .ig__grid { grid-template-columns: 1fr 1fr; } }
 
-/* ---------- Recipe 01: monumental type over a flat photo grid ---------- */
+/* ---------- Line 01: monumental type over a flat photo grid ---------- */
 .r2 { padding-top: clamp(56px, 7vw, 100px); }
 .r2__top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid color-mix(in srgb, var(--on-black) 18%, transparent); padding-bottom: 14px; }
 .r2__label { font-size: 13.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--on-black-2); }
 .r2__mast { font-weight: 300; text-transform: uppercase; font-size: clamp(72px, 15.5vw, 260px); line-height: .82; letter-spacing: -0.045em; margin: clamp(18px, 2vw, 30px) 0 clamp(28px, 3vw, 48px) -0.04em; white-space: nowrap; }
-.r2__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
+.r2__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
 .r2__grid .tile__info { padding-top: 12px; }
 .r2__grid .tile__name { font-size: 17.5px; }
 .r2__foot { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: clamp(32px, 4vw, 56px); flex-wrap: wrap; border-top: 1px solid color-mix(in srgb, var(--on-black) 18%, transparent); padding-top: 24px; }
@@ -194,7 +194,7 @@
 
 /* ---------- Hero on desktop: wordmark sized by height too, so it never reaches the copy ---------- */
 @media (min-width: 901px) {
-  .hero__word, .hero__word.hero__word--line { font-size: min(19vw, 30svh, 340px); padding-top: 7svh; }
+  .hero__word, .hero__word.hero__word--line { font-size: min(11.5vw, 19svh, 210px); padding-top: 7svh; }
   .hero__copy { max-width: 600px; }
   .hero__h { font-size: clamp(36px, 3.6vw, 64px); }
 }
@@ -206,7 +206,7 @@
   .hero { height: 170vh; }
   .hero__stage { place-items: start center; }
   .hero__film { height: 62%; margin-top: 3svh; }
-  .hero__word, .hero__word.hero__word--line { inset: 3svh 0 auto 0; height: 62%; align-items: center; padding-top: 0; font-size: 25vw; }
+  .hero__word, .hero__word.hero__word--line { inset: 3svh 0 auto 0; height: 62%; align-items: center; padding-top: 0; font-size: 14vw; }
   .hero__copy { left: 16px; right: 16px; bottom: clamp(16px, 3svh, 28px); max-width: none; gap: 12px; }
   .hero__h { font-size: clamp(28px, 8.4vw, 40px); }
   .hero__p { font-size: 16px; line-height: 1.45; }
@@ -235,7 +235,7 @@
   .intro__in { gap: 26px; }
   .intro .lede { max-width: 30ch; }
 
-  /* Recipe 01: a swipeable rail of large cards instead of a packed grid */
+  /* Line 01: a swipeable rail of large cards instead of a packed grid */
   .r2__top { border-bottom: 0; padding-bottom: 0; }
   .r2__label:last-child { display: none; }
   .r2__mast { font-size: 20vw; margin: 14px 0 30px -0.03em; }
@@ -279,3 +279,6 @@
   .voice q { font-size: 25px; line-height: 1.35; }
   .ig__grid { gap: 10px; }
 }
+
+/* Northline: keep the hero line short so it never runs under the film */
+.hero__p { max-width: 30ch; }

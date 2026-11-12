@@ -1,6 +1,6 @@
 ---
-name: ACHAR
-description: Recipe 01, one boxy linen shirt in seven colours, shown in a quiet white gallery.
+name: Northline
+description: Northline Line 01 storefront. NOTE: this file still documents the earlier ACHAR white-gallery system and is out of date.
 colors:
   paper: "#ffffff"
   stone: "#f3f2ef"
@@ -164,7 +164,9 @@ components:
     padding: "26px"
 ---
 
-# Design System: ACHAR
+# Design System: Northline (stale)
+
+> Out of date. The live site is black-dominant with a light theme, uses the Northline mark and wordmark (see README), and shows cropped mood photography instead of the drawn shirt. Regenerate this file before relying on it.
 
 ## Overview
 

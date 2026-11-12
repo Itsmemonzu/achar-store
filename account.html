@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem("achar.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("northline.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Account — ACHAR</title>
+  <title>Account — Northline</title>
   <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..600&family=Urbanist:wght@200..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/achar.css?v=202611101311">
-  <link rel="stylesheet" href="assets/css/pages.css?v=202611101311">
+  <link rel="stylesheet" href="assets/css/northline.css?v=202611130103">
+  <link rel="stylesheet" href="assets/css/pages.css?v=202611130103">
 </head>
 <body data-page="account">
 <main id="main" class="acct">
@@ -33,7 +33,7 @@
         <div class="fld"><label for="u-name">Full name</label><input class="inp" id="u-name" autocomplete="name"></div>
         <div class="fld"><label for="u-phone">Mobile number</label><input class="inp" id="u-phone" inputmode="tel" placeholder="01XXXXXXXXX"></div>
         <div class="fld"><label for="u-email">Email</label><input class="inp" id="u-email" type="email" placeholder="you@email.com"></div>
-        <label class="check"><input type="checkbox" checked> Tell me when Recipe 02 is ready</label>
+        <label class="check"><input type="checkbox" checked> Tell me when Line 02 drops</label>
         <button class="btn btn--block" type="submit">Create account</button>
         <p class="err" data-msg="up" aria-live="polite"></p>
       </form>
@@ -42,7 +42,7 @@
 
     <section>
       <h2 class="t-cap" style="margin-bottom:14px">Track an order</h2>
-      <form class="co__promo" data-track><input class="inp" placeholder="Order number, e.g. ACH-9F2K1QZ" aria-label="Order number"><button class="btn" type="submit">Track</button></form>
+      <form class="co__promo" data-track><input class="inp" placeholder="Order number, e.g. NL-9F2K1QZ" aria-label="Order number"><button class="btn" type="submit">Track</button></form>
       <div class="track" data-track-out></div>
 
       <h2 class="t-cap" style="margin:48px 0 14px">Recent orders <span class="t-small" style="text-transform:none;letter-spacing:0">· sample</span></h2>
@@ -50,17 +50,17 @@
     </section>
   </div>
 </main>
-<script src="assets/js/data.js?v=202611101311"></script>
-<script src="assets/js/store.js?v=202611101311"></script>
-<script src="assets/js/shirt.js?v=202611101311"></script>
-<script src="assets/js/ui.js?v=202611101311"></script>
+<script src="assets/js/data.js?v=202611130103"></script>
+<script src="assets/js/store.js?v=202611130103"></script>
+<script src="assets/js/shirt.js?v=202611130103"></script>
+<script src="assets/js/ui.js?v=202611130103"></script>
 <script>
 (function () {
-  const { $, $$, shirt } = window.ACHAR_UI;
-  const S = window.ACHAR_STORE;
+  const { $, $$, shirt } = window.NL_UI;
+  const S = window.NL_STORE;
   const orders = [
-    { code: "ACH-7Q1X0LM", date: "28 Oct 2026", ids: ["r01-navy", "r01-oat"], total: "৳4,100 · COD", st: "Delivered" },
-    { code: "ACH-5B8T2RC", date: "02 Nov 2026", ids: ["r01-lime"], total: "৳2,050 · bKash", st: "On the road", live: true },
+    { code: "NL-7Q1X0LM", date: "28 Oct 2026", ids: ["nl-blazer", "nl-tee"], total: "৳6,400 · COD", st: "Delivered" },
+    { code: "NL-5B8T2RC", date: "02 Nov 2026", ids: ["nl-jersey"], total: "৳2,050 · bKash", st: "On the road", live: true },
   ];
   $("[data-orders]").innerHTML = orders.map((o) => `<div class="order"><span class="order__imgs">${o.ids.map((i) => `<span>${shirt(S.product(i))}</span>`).join("")}</span><span><b>${o.code}</b><small>${o.date} · ${o.total}</small></span><span class="st ${o.live ? "live" : ""}">${o.st}</span></div>`).join("");
   $$("[data-tab]").forEach((t) => t.addEventListener("click", () => {
@@ -81,14 +81,14 @@
     if (f.dataset.form === "in" && !/^\d{6}$/.test($("#a-otp").value)) { m.textContent = "The code is 6 digits."; return; }
     if (f.dataset.form === "up" && !/^01[3-9]\d{8}$/.test($("#u-phone").value)) { m.textContent = "Use an 11-digit Bangladeshi mobile number."; return; }
     m.style.color = "var(--ink)";
-    m.textContent = f.dataset.form === "in" ? "Signed in (demo). Your orders are on the right." : "Account created (demo). Welcome to ACHAR.";
+    m.textContent = f.dataset.form === "in" ? "Signed in (demo). Your orders are on the right." : "Account created (demo). Welcome to Northline.";
   }));
-  const steps = ["Ordered", "Packed in kraft", "On the road", "Delivered"];
+  const steps = ["Ordered", "Packed in the mailer", "On the road", "Delivered"];
   $("[data-track]").addEventListener("submit", (e) => {
     e.preventDefault();
     const v = e.target.querySelector("input").value.trim().toUpperCase();
     const out = $("[data-track-out]");
-    if (!/^ACH-[A-Z0-9]{5,}$/.test(v)) { out.innerHTML = `<p class="err">Order numbers look like ACH-9F2K1QZ. You'll find yours in the confirmation SMS.</p>`; return; }
+    if (!/^NL-[A-Z0-9]{5,}$/.test(v)) { out.innerHTML = `<p class="err">Order numbers look like NL-9F2K1QZ. You'll find yours in the confirmation SMS.</p>`; return; }
     const at = (v.charCodeAt(v.length - 1) % 3) + 1;
     out.innerHTML = `<ol class="track__steps">${steps.map((s, i) => `<li class="${i < at ? "is-done" : i === at ? "is-live" : ""}">${s}</li>`).join("")}</ol><p class="t-small" style="margin-top:12px">Demo tracking for ${v}</p>`;
   });

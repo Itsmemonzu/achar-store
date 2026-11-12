@@ -121,7 +121,7 @@
 .gw__warn svg { width: 20px; height: 20px; flex: none; stroke: var(--sale); fill: none; stroke-width: 1.8; stroke-linecap: round; }
 .gw__merchant { margin: 0 22px; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; background: var(--stone); }
 .gw__m { width: 40px; height: 40px; border-radius: 10px; background: var(--paper); display: grid; place-items: center; }
-.gw__m .jar { width: 12px; height: 18px; fill: var(--ink); }
+.gw__m .nl-mark { width: 18px; height: 18px; fill: var(--ink); }
 .gw__merchant b { display: block; font-weight: 700; }
 .gw__merchant small { color: var(--grey); font-size: 15px; }
 .gw__amt { font-size: 24px; font-weight: 600; }
@@ -169,7 +169,7 @@
 .slip { background: var(--paper); border-radius: 18px; padding: 28px 28px 22px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.28), 0 0 0 1px var(--line); position: relative; animation: slip 1.2s var(--ease) both; }
 @keyframes slip { from { transform: translateY(40px) rotate(2deg); } }
 .slip__top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 18px; border-bottom: 1px dashed #d6d3cc; }
-.slip__top .jar { width: 13px; height: 19px; fill: var(--ink); }
+.slip__top .nl-mark { width: 18px; height: 18px; fill: var(--ink); }
 .slip__code { font-size: 15px; letter-spacing: .14em; color: var(--grey); }
 .slip__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; padding: 18px 0; border-bottom: 1px dashed #d6d3cc; font-size: 16px; }
 .slip__grid small { display: block; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--grey); margin-bottom: 3px; }

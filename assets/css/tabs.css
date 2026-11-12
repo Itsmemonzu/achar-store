@@ -70,7 +70,7 @@ body.on-black .header .badge { background: var(--on-black); color: var(--black);
 .quiz .chip[aria-pressed="true"] { background: var(--on-black); color: var(--black); border-color: var(--on-black); }
 .quiz__out { position: sticky; top: calc(var(--header-h) + 24px); border-radius: 24px; overflow: hidden; background: var(--black-2); min-height: 500px; display: grid; }
 .qo__pending { display: grid; place-content: center; justify-items: center; text-align: center; gap: 12px; padding: 40px; color: var(--on-black-2); }
-.qo__pending .jar-big { width: 46px; height: 66px; fill: none; stroke: #5a5750; stroke-width: 1; }
+.qo__pending .nl-mark-big { width: 52px; height: 52px; fill: #5a5750; }
 .qo__field { display: grid; place-items: center; padding: 36px 30px 10px; transition: background-color 1s var(--ease-soft); }
 .qo__field .shirt { width: min(260px, 70%); animation: float 7s ease-in-out infinite; }
 .qo__body { padding: 22px 26px 26px; display: grid; gap: 12px; background: var(--black-2); }
@@ -223,7 +223,7 @@ body.on-black .header .badge { background: var(--on-black); color: var(--black);
   .strip__shirt img { object-position: 50% 20%; }
 }
 
-/* ---------- Recipe page on phones: the four details become a swipeable rail ---------- */
+/* ---------- Story page on phones: the four details become a swipeable rail ---------- */
 @media (max-width: 760px) {
   .details { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
   .details::-webkit-scrollbar { display: none; }

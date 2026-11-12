@@ -1,39 +1,41 @@
-/* ACHAR catalogue.
-   Colours, fabric names and product photos come from ACHAR's Instagram (@achar.wear):
-   Recipe 01 — Boxy Linen Shirt (Oatmeal, Lime), Boxy Cotton Shirt (Powder Blue, Navy), Brown.
-   Prices, specs and reviews are SAMPLE content for the pitch. */
-window.ACHAR_DATA = (function () {
+/* Northline catalogue. Northline is a concept brand for this demo storefront.
+   Product photos are cropped from third-party mood photography (assets/img/look-XX.jpg) as placeholders;
+   replace them with Northline's own shoot. Prices, specs and reviews are SAMPLE content. */
+window.NL_DATA = (function () {
   const img = (n) => `assets/img/look-${String(n).padStart(2, "0")}.jpg`;
-  const ig = (n) => `assets/img/p/ig-${String(n).padStart(2, "0")}.jpg`;
+  const shot = (slug, n) => `assets/img/p/nl-${slug}-${n}.jpg`;
   const SIZES = ["S", "M", "L", "XL", "XXL"];
-  const PRICE = 2450;
   const SALE = 400;
 
-  const shirt = (o) => ({
+  /* every Line 01 piece: base price, ৳400 off for the Puja offer */
+  const piece = (o) => ({
     cat: "shirts",
-    recipe: "01",
-    price: PRICE - SALE,
-    was: PRICE,
+    line: "01",
     sizes: SIZES,
-    season: "Late summer / Pre-winter",
+    season: "Autumn / Winter 2026",
+    was: o.base,
+    price: o.base - SALE,
+    imgs: [shot(o.slug, 1), shot(o.slug, 2)],
     ...o,
   });
 
   const products = [
-    shirt({ id: "r01-oat", name: "Boxy Linen Shirt", colour: "Oatmeal", hex: "#D9CFBF", ink: "#141414", batch: "07", fabric: "Linen", ingredients: "Linen (composition to be confirmed)", vibe: ["calm", "everyday"], notes: "Mild. Goes with everything, forgives everything.", imgs: [ig(9), ig(6)], mood: [img(2), img(20)], soldOut: [], tag: "bestseller" }),
-    shirt({ id: "r01-lime", name: "Boxy Linen Shirt", colour: "Lime", hex: "#D6DC4C", ink: "#141414", batch: "07", fabric: "Linen", ingredients: "Linen (composition to be confirmed)", vibe: ["loud", "weekend"], notes: "Sour, bright, a little loud. For days you want to be found.", imgs: [ig(11), ig(7)], mood: [img(8), img(5)], soldOut: ["XXL"], tag: "new" }),
-    shirt({ id: "r01-sky", name: "Boxy Cotton Shirt", colour: "Powder Blue", hex: "#A9C2DC", ink: "#141414", batch: "07", fabric: "Cotton", ingredients: "Cotton (composition to be confirmed)", vibe: ["calm", "office"], notes: "Cool and clean. Monsoon morning in a shirt.", imgs: [ig(10), ig(4)], mood: [img(1), img(19)], soldOut: ["S"], tag: null }),
-    shirt({ id: "r01-navy", name: "Boxy Cotton Shirt", colour: "Navy", hex: "#1D2744", ink: "#f2f0eb", batch: "06", fabric: "Cotton", ingredients: "Cotton (composition to be confirmed)", vibe: ["office", "evening"], notes: "Deep and steady. After-six, or a Monday that matters.", imgs: [ig(12), ig(3), ig(5)], mood: [img(15), img(17)], soldOut: [], tag: "bestseller" }),
-    shirt({ id: "r01-brown", name: "Boxy Shirt", colour: "Brown", hex: "#3B2A22", ink: "#f2f0eb", batch: "06", fabric: "To be confirmed", ingredients: "Fabric to be confirmed by ACHAR", vibe: ["evening", "everyday"], notes: "Dark roast. Serious without trying.", imgs: [ig(8), ig(1)], mood: [img(13), img(7)], soldOut: [], tag: null }),
+    piece({ id: "nl-tee", slug: "tee", name: "Boxy Tee", type: "Tee", colour: "Black", hex: "#151515", ink: "#f2f0eb", base: 1950, batch: "03", fabric: "Cotton", ingredients: "Heavyweight cotton jersey (sample spec)", vibe: ["everyday", "weekend"], notes: "The one you reach for first. Dropped shoulder, boxy body, no fuss.", soldOut: [], tag: "bestseller" }),
+    piece({ id: "nl-hoodie", slug: "hoodie", name: "Hooded Pullover", type: "Hoodie", colour: "Bone", hex: "#E6E1D8", ink: "#141414", base: 3250, batch: "03", fabric: "Cotton fleece", ingredients: "Brushed cotton fleece (sample spec)", vibe: ["calm", "weekend"], notes: "Soft, heavy, and quietly loud in Bone.", soldOut: ["XXL"], tag: "new" }),
+    piece({ id: "nl-denim", slug: "denim", name: "Wide-Leg Denim", type: "Denim", colour: "Washed Grey", hex: "#9C9EA1", ink: "#141414", base: 3650, batch: "02", fabric: "Denim", ingredients: "Rigid cotton denim, washed (sample spec)", vibe: ["everyday", "weekend"], notes: "Wide all the way down. Stack it over boots or roll it once.", sizes: ["28", "30", "32", "34", "36"], soldOut: ["28"], tag: null }),
+    piece({ id: "nl-work", slug: "work", name: "Cropped Work Jacket", type: "Jacket", colour: "Ink", hex: "#1E2130", ink: "#f2f0eb", base: 4850, batch: "02", fabric: "Cotton twill", ingredients: "Cotton twill with a printed lining (sample spec)", vibe: ["evening", "office"], notes: "Short, square and sharp. Wear it open.", soldOut: [], tag: null }),
+    piece({ id: "nl-blazer", slug: "blazer", name: "Pinstripe Cropped Blazer", type: "Blazer", colour: "Navy", hex: "#1D2744", ink: "#f2f0eb", base: 5250, batch: "02", fabric: "Wool blend", ingredients: "Wool-blend suiting, pinstripe (sample spec)", vibe: ["office", "evening"], notes: "Tailoring, cut short. Monday to midnight.", soldOut: ["S"], tag: "bestseller" }),
+    piece({ id: "nl-leather", slug: "leather", name: "Faux-Leather Jacket", type: "Jacket", colour: "Black", hex: "#101010", ink: "#f2f0eb", base: 5850, batch: "01", fabric: "Faux leather", ingredients: "Faux leather with a quilted lining (sample spec)", vibe: ["evening", "loud"], notes: "Big shoulders, soft drape. Turns a T-shirt into an outfit.", soldOut: [], tag: null }),
+    piece({ id: "nl-jersey", slug: "jersey", name: "Mesh Jersey", type: "Top", colour: "Navy", hex: "#1F2A44", ink: "#f2f0eb", base: 2450, batch: "03", fabric: "Mesh", ingredients: "Breathable polyester mesh (sample spec)", vibe: ["loud", "weekend"], notes: "A number on the front and nothing to prove.", soldOut: [], tag: "new" }),
     {
-      id: "gift-jar", cat: "gift", recipe: "—", name: "Gift Jar", colour: "Gift card", hex: "#C4A27A", ink: "#141414", batch: "—",
-      price: 2000, was: null, sizes: ["৳1,000", "৳2,000", "৳5,000"], soldOut: [], vibe: [], tag: null,
-      ingredients: "Digital gift card, sent by SMS and email", notes: "Can't pick a colour for them? Let them choose.", imgs: [ig(6)], mood: [],
+      id: "gift-card", cat: "gift", line: "—", name: "Gift Card", colour: "Gift card", hex: "#C9C6BF", ink: "#141414", batch: "—",
+      price: 2000, was: null, sizes: ["৳1,000", "৳2,000", "৳5,000"], soldOut: [], vibe: [], tag: null, imgs: [],
+      ingredients: "Digital gift card, sent by SMS and email", notes: "Not sure of their size? Let them choose.",
     },
     {
-      id: "r02", cat: "upcoming", recipe: "02", name: "Recipe 02", colour: "Still fermenting", hex: "#1B1A16", ink: "#F2ECDF", batch: "—",
+      id: "nl-02", cat: "upcoming", line: "02", name: "Line 02", colour: "On the drawing board", hex: "#1B1A16", ink: "#F2ECDF", batch: "—",
       price: null, was: null, sizes: [], soldOut: [], vibe: [], tag: "soon", imgs: [],
-      ingredients: "Under wraps", notes: "In the jar. Not ready yet. Get told first.", mood: [],
+      ingredients: "Under wraps", notes: "Still being drawn. Get told first.",
     },
   ];
 
@@ -43,10 +45,10 @@ window.ACHAR_DATA = (function () {
   };
 
   const reviews = [
-    { name: "Sample customer", city: "Dhanmondi", colour: "Oatmeal", text: "Placeholder review. Boxy without looking sloppy; I sized down once.", stars: 5 },
-    { name: "Sample customer", city: "Chattogram", colour: "Navy", text: "Placeholder review. Came in the kraft bag with the little jar tag. Two-day delivery.", stars: 5 },
-    { name: "Sample customer", city: "Sylhet", colour: "Lime", text: "Placeholder review. Brighter than I expected, in a good way.", stars: 4 },
-    { name: "Sample customer", city: "Uttara", colour: "Powder Blue", text: "Placeholder review. Gets softer every wash.", stars: 5 },
+    { name: "Sample customer", city: "Dhanmondi", colour: "Black", text: "Placeholder review. Boxy without looking sloppy; I sized down once.", stars: 5 },
+    { name: "Sample customer", city: "Chattogram", colour: "Navy", text: "Placeholder review. Came in a black mailer with the little arrow tag. Two-day delivery.", stars: 5 },
+    { name: "Sample customer", city: "Sylhet", colour: "Bone", text: "Placeholder review. Heavier than I expected, in a good way.", stars: 4 },
+    { name: "Sample customer", city: "Uttara", colour: "Washed Grey", text: "Placeholder review. The wide leg stays wide after washing.", stars: 5 },
   ];
 
   const sizeChart = {
@@ -56,5 +58,5 @@ window.ACHAR_DATA = (function () {
 
   const districts = ["Dhaka", "Gazipur", "Narayanganj", "Chattogram", "Sylhet", "Rajshahi", "Khulna", "Barishal", "Rangpur", "Mymensingh", "Cox's Bazar", "Cumilla", "Bogura"];
 
-  return { products, vibes, reviews, sizeChart, districts, img, ig, PRICE, SALE };
+  return { products, vibes, reviews, sizeChart, districts, img, shot, SALE };
 })();

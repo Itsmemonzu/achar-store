@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem("achar.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("northline.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Help &amp; delivery — ACHAR</title>
-  <meta name="description" content="Delivery, payments, exchanges and sizing for ACHAR.">
+  <title>Help &amp; delivery — Northline</title>
+  <meta name="description" content="Delivery, payments, exchanges and sizing for Northline.">
   <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..600&family=Urbanist:wght@200..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/achar.css?v=202611101311">
-  <link rel="stylesheet" href="assets/css/tabs.css?v=202611101311">
+  <link rel="stylesheet" href="assets/css/northline.css?v=202611130103">
+  <link rel="stylesheet" href="assets/css/tabs.css?v=202611130103">
 </head>
 <body data-page="help">
 <main id="main">
@@ -34,7 +34,7 @@
           <div class="help__card"><b>Outside Dhaka</b><big>৳130</big><span>3–5 days, all 64 districts</span></div>
           <div class="help__card"><b>Same-day</b><big>৳150</big><span>Dhaka, order before 2pm</span></div>
         </div>
-        <p>Every order ships in a kraft box with the jar tag. You'll get an SMS with the rider's number on the day of delivery.</p>
+        <p>Every order ships in a black mailer with the arrow tag. You'll get an SMS with the rider's number on the day of delivery.</p>
       </section>
 
       <section class="help__sec" id="payments">
@@ -46,12 +46,12 @@
 
       <section class="help__sec" id="exchange">
         <h2>Exchanges</h2>
-        <p>Exchange any unworn Recipe 01 shirt for another size or colour within 7 days. Inside Dhaka, we pick it up from your door. Outside Dhaka, send it back with the courier and we'll ship the new one free.</p>
+        <p>Exchange any unworn Line 01 piece for another size within 7 days. Inside Dhaka, we pick it up from your door. Outside Dhaka, send it back with the courier and we'll ship the new one free.</p>
       </section>
 
       <section class="help__sec" id="size">
         <h2>Size guide</h2>
-        <p>Recipe 01 is cut boxy. Prefer it closer? Take one size down. Inches, garment laid flat (sample chart).</p>
+        <p>Line 01 is cut boxy. Prefer it closer? Take one size down. Inches, garment laid flat (sample chart).</p>
         <div data-size-table></div>
       </section>
 
@@ -59,15 +59,15 @@
         <h2>FAQ</h2>
         <div class="acc">
           <details><summary>Can I open the box before paying? <span class="pm"></span></summary><div class="acc__body"><p>Yes. With cash on delivery you can check the shirt in front of the rider before you pay.</p></div></details>
-          <details><summary>Is paying online safe? <span class="pm"></span></summary><div class="acc__body"><p>On the live store, online payments are handled on SSLCOMMERZ's secure page. ACHAR never sees or stores your card number.</p></div></details>
+          <details><summary>Is paying online safe? <span class="pm"></span></summary><div class="acc__body"><p>On the live store, online payments are handled on SSLCOMMERZ's secure page. Northline never sees or stores your card number.</p></div></details>
           <details><summary>Do you ship outside Bangladesh? <span class="pm"></span></summary><div class="acc__body"><p>Not yet. Going global? Hopefully soon.</p></div></details>
-          <details><summary>When is Recipe 02? <span class="pm"></span></summary><div class="acc__body"><p>It's still in the jar. Join the list in the footer and we'll tell you first.</p></div></details>
+          <details><summary>When is Line 02? <span class="pm"></span></summary><div class="acc__body"><p>It's still on the drawing board. Join the list in the footer and we'll tell you first.</p></div></details>
         </div>
       </section>
 
       <section class="help__sec" id="contact">
         <h2>Contact</h2>
-        <p>The fastest way is a DM on Instagram <a class="link" href="https://www.instagram.com/achar.wear/" target="_blank" rel="noopener" style="font-size:12px">@achar.wear</a>. Phone, email and address to be added by ACHAR.</p>
+        <p>Phone, email and Instagram to be added. Northline is a concept brand for this demo storefront.</p>
         <form class="contact-form" data-contact novalidate>
           <div class="fld"><label for="c-name">Name</label><input class="inp" id="c-name" autocomplete="name"></div>
           <div class="fld"><label for="c-phone">Phone or email</label><input class="inp" id="c-phone"></div>
@@ -78,13 +78,13 @@
     </div>
   </div>
 </main>
-<script src="assets/js/data.js?v=202611101311"></script>
-<script src="assets/js/store.js?v=202611101311"></script>
-<script src="assets/js/shirt.js?v=202611101311"></script>
-<script src="assets/js/ui.js?v=202611101311"></script>
+<script src="assets/js/data.js?v=202611130103"></script>
+<script src="assets/js/store.js?v=202611130103"></script>
+<script src="assets/js/shirt.js?v=202611130103"></script>
+<script src="assets/js/ui.js?v=202611130103"></script>
 <script>
 (function () {
-  const D = window.ACHAR_DATA, U = window.ACHAR_UI;
+  const D = window.NL_DATA, U = window.NL_UI;
   const { $, $$ } = U;
   $("[data-pay-help]").innerHTML = `<div style="display:grid;gap:12px">
     <div><p class="t-cap" style="margin-bottom:8px">Gateway</p>${U.payBadges(["ssl"])}</div>
