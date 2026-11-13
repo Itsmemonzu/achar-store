@@ -32,10 +32,14 @@
   const word = $("[data-word]");
   let maxSpread = 0;
   const measureWord = () => {
-    /* Centre the H (the middle letter) on the film, not the word as a whole. */
-    const sr0 = stage.getBoundingClientRect(), hr = word.querySelector("span:nth-child(5)").getBoundingClientRect();
+    /* Centre the whole word on the stage. The film sits on the centre line too, so the letters
+       left and right of it show the same width either side (NORT is wider than LINE, so centring
+       the middle H would push the word left). The spread is symmetric, so the centre holds while it opens. */
+    const sr0 = stage.getBoundingClientRect();
+    const fr = word.querySelector("span:first-child").getBoundingClientRect();
+    const lr = word.querySelector("span:last-child").getBoundingClientRect();
     const wx = parseFloat(stage.style.getPropertyValue("--wx") || 0);
-    stage.style.setProperty("--wx", `${(wx + (sr0.left + sr0.width / 2) - (hr.left + hr.width / 2)).toFixed(1)}px`);
+    stage.style.setProperty("--wx", `${(wx + (sr0.left + sr0.width / 2) - (fr.left + lr.right) / 2).toFixed(1)}px`);
     const w = word.querySelector("span:first-child").getBoundingClientRect();
     const r = word.querySelector("span:last-child").getBoundingClientRect();
     const sp = parseFloat(stage.style.getPropertyValue("--spread") || 0);
